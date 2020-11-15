@@ -82,12 +82,12 @@ export default {
   methods: {
     googleLogin() {
       googleLogin().then(res => {
-        window.location.href = res.url.replace('howcobe.com', 'm.howcobe.com')
+        window.location.href = res.url
       })
     },
     fbLogin() {
       fbLogin().then(res => {
-        window.location.href = res.url.replace('howcobe.com', 'm.howcobe.com')
+        window.location.href = res.url
       })
     },
 
