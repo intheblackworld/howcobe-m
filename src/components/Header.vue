@@ -28,10 +28,11 @@ export default {
       this.$emit('focusSearch')
     },
     searchByEnter(e) {
+      console.log(e.keyCode)
       if (e.keyCode === 13) {
         this.$store.commit('updateSearch', this.search)
-        if (this.$route.path === '/') {
-          this.$router.push('course')
+        if (this.$route.path.includes('/home')) {
+          this.$router.push('/courses')
         }
         // if (this.pattern === 'compare') {
         //   // 叫出 tinder 效果彈窗
