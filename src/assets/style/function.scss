@@ -1,0 +1,8 @@
+@function size($size) {
+  $c-size: 100vw * $size / 1440; // 1440 / 789
+  @return #{$c-size};
+}
+@function size-m($size) {
+  $c-size: 100vw * $size / 375;
+  @return #{$c-size};
+}

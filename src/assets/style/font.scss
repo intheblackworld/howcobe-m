@@ -1,0 +1,60 @@
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+ul,
+li,
+p {
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+h2 {
+  margin: 0;
+  font-weight: normal;
+}
+
+h3 {
+  font-family: '微軟正黑體', 'Microsoft JhengHei', 'Helvetica Neue', Helvetica;
+  margin: 0;
+  font-weight: bold;
+}
+
+// p {
+//   font-family: 'Roboto', serif;
+//   // font-family: '微軟正黑體', 'Microsoft JhengHei', 'Helvetica Neue', Helvetica,
+//   //   Arial;
+//   margin: 0;
+// }
+
+/* font */
+
+@font-face {
+  font-family: "mallory";
+  src: url("../font/Mallory\ Medium.ttf");
+}
+@font-face {
+  font-family: "mallory";
+  src: url("../font/Mallory\ Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "mallory";
+  src: url("../font/Mallory\ Book.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "mallory";
+  src: url("../font/Mallory\ Light.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "mallory";
+  src: url("../font/Mallory\ ExtraLight.ttf");
+  font-weight: 400;
+}

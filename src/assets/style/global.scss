@@ -1,0 +1,99 @@
+@import './reset.scss';
+@import './aos.scss';
+@import './transition.scss';
+@import './layout.scss';
+@import './element.scss';
+@import './tool_class.scss';
+@import './atom.scss';
+@import './font.scss';
+
+html,
+body {
+  overflow-x: hidden;
+  *::-webkit-scrollbar {
+    // display: none;
+  }
+
+  * {
+    outline: none !important;
+  }
+
+  &.dialog-opened {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+}
+
+#app {
+  height: 100vh;
+}
+
+.scroll-top {
+  color: #fff;
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #303841;
+  cursor: pointer;
+}
+
+.adaptive-entry {
+  color: #fff;
+  position: fixed;
+  z-index: 10;
+  bottom: 70px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  text-align: center;
+  background-color: #303841;
+  cursor: pointer;
+}
+
+.loading-text {
+  width: 100vw;
+  height: 100vh;
+  color: #999;
+  font-size: 18px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  .hint {
+    padding: 15px;
+    background-color: #303841;
+    color: #fff;
+  }
+}
+
+
+/* 螢幕尺寸標準 */
+/* 平板尺寸 */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  html,
+  body {
+    overflow-x: hidden;
+    *::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+/* 螢幕尺寸標準 */
+/* 手機尺寸 */
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+    *::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
