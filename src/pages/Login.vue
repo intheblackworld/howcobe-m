@@ -82,12 +82,12 @@ export default {
   methods: {
     googleLogin() {
       googleLogin().then(res => {
-        window.location.href = res.url
+        window.location.href = res.url.replace('howcobe.com', 'm.howcobe.com')
       })
     },
     fbLogin() {
       fbLogin().then(res => {
-        window.location.href = res.url
+        window.location.href = res.url.replace('howcobe.com', 'm.howcobe.com')
       })
     },
 
@@ -143,6 +143,7 @@ export default {
 
 <style lang="scss" scoped>
 .login {
+  width: 100vw;
   height: 100vh;
   background-color: rgb(56, 71, 94);
   // background-color: #999;
