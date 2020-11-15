@@ -232,12 +232,16 @@ export default {
       'interests',
     ]),
     ...mapState('course', ['collect_list', 'collect_compare']),
-    
+
     collect_courses() {
-      return this.collect_list.map(course => ({
-        course_id: course.course_id,
-        ...course.like_course
-      }))
+      if (this.collect_list) {
+        return this.collect_list.map(course => ({
+          course_id: course.course_id,
+          ...course.like_course,
+        }))
+      } else {
+        return []
+      }
     },
     // collect_compare_data() {
     //   return this.formatCollectCompareData(this.collect_compare)
@@ -406,7 +410,7 @@ export default {
 
     // 收藏比課
     await this.$store.dispatch('course/getCollectCompare')
-    
+
     // 投票相關
     await this.getMyVotes()
   },

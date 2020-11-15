@@ -396,7 +396,7 @@ export default {
   display: inline-block;
   min-width: 80px;
   margin-right: 20px;
-  font-size: size-m(16);
+  font-size: 14px;
   line-height: 100%;
   text-align: center;
   letter-spacing: 0.02em;
