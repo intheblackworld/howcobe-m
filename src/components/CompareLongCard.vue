@@ -3,8 +3,9 @@
     <div class="compare-card flex-ac flex-jb" v-if="compare.courses.length > 0">
       <div class="content flex-ac flex-jb wrap">
         <div class="course" v-for="course in compare.courses.slice(0, 4)" :key="course.id">
-          <div class="compare-img flex-ac flex-jr">
+          <div class="compare-img flex-ac flex-jr relative">
             <img :src="course.cover_image" alt="">
+            <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">
           </div>
           <div class="title">
             {{sliceTitle(course.title)}}
@@ -117,6 +118,15 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .platform-img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 20px;
   }
 }
 

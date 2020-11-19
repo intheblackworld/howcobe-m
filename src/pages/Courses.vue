@@ -10,7 +10,7 @@
     </div>
     <div class="container course-container" v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="20">
       <div v-if="result.numOfResults > 0">
-        <LongCard :course="course" v-for="course in result.courses" :key="course.id"></LongCard>
+        <LongCard :course="course" v-for="course in result.courses" :key="course.id" @update="getCourse"></LongCard>
       </div>
       <!-- <div class="content-head flex-ab flex-jb">
         <div class="left flex-ab">

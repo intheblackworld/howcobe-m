@@ -23,16 +23,6 @@
     <div class="tab-container flex-ac">
       {{detail_context.description}}
     </div>
-    <!-- <div class="thumb-container relative">
-      <div class="thumb-content flex-ac flex-jb">
-        <div class="flex-ac">課程售價: ${{current.price}}</div>
-        <div class="flex-ac">上課人數: {{current.consumers}}</div>
-      </div>
-      <div class="thumb-content flex-ac flex-jb">
-        <div class="flex-ac">課程平台: <img :src="require(`@/assets/img/${current.platform}.png`)" alt="" class="thumb-content-img"></div>
-        <div class="flex-ac">上架日期: {{formatTime(current.published_at)}}</div>
-      </div>
-    </div> -->
     <div class="container flex" key="detail-content">
       <div class="rank-item flex-ac flex-ja" v-for="(course, index) in detail_context.courses" :key="`rank ${course.cover_image}`">
         <img :src="course.cover_image" alt="" class="rank-img">

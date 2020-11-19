@@ -122,7 +122,7 @@
       </div>
     </div> -->
     <div>
-      <Compare :type="type" />
+      <Compare :type="type" @closeDialog="$emit('closeDialog')" />
     </div>
     <!-- <div class="flex-c">
       <div
@@ -193,7 +193,7 @@ export default {
   },
 
   watch: {
-    '$store.state.course.compare_list': function(list) {
+    '$store.state.course.compare_list': function (list) {
       if (list.length >= 2) {
         this.beginCompare()
       }
@@ -210,7 +210,7 @@ export default {
 
     searchReg(list, val) {
       return list
-        .filter(item => item.title.toLowerCase().includes(val.toLowerCase()))
+        .filter((item) => item.title.toLowerCase().includes(val.toLowerCase()))
         .slice(0, 5)
     },
 
@@ -242,8 +242,8 @@ export default {
     beginCompare() {
       this.searchVal = ''
       addCompareStack({
-        course_ids: this.compare_list.map(item => item.id),
-      }).then(res => {
+        course_ids: this.compare_list.map((item) => item.id),
+      }).then((res) => {
         this.$store.commit('course/setCompareId', res.documents._id)
       })
     },

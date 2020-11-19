@@ -2,6 +2,7 @@
   <div class="compare-container flex">
     <div class="compare-side" v-if="type === 0">
       <div class="side-title flex-c"></div>
+      <div class="side-title flex-c"></div>
       <div class="side-title flex-c">課程平台</div>
       <div class="side-title flex-c">課程名稱</div>
       <div class="side-title flex-c">課程售價</div>
@@ -12,20 +13,25 @@
     </div>
     <div class="compare-side" v-if="type === 1">
       <div class="side-title flex-c"></div>
+      <div class="side-title flex-c"></div>
       <div class="side-title flex-c">課程章節</div>
     </div>
     <div class="compare-side" v-if="type === 2">
+      <div class="side-title flex-c"></div>
       <div class="side-title flex-c"></div>
       <div class="side-title flex-c">其他資訊</div>
     </div>
     <div class="compare-grid">
       <div class="compare-item" v-for="(item, columnIndex) in compare_list" :key="`compare-${columnIndex}`">
-        <el-button icon="el-icon-close" circle plain @click="removeCompare(item.id)" type="danger" class="close-btn"></el-button>
+        <div class="close-btn flex-c" @click.stop="removeCompare(item.id)">
+          <img src="@/assets/img/close-w.png" alt="" />
+        </div>
         <div v-if="type === 0">
           <div class="compare-row no-padding">
             <img :src="item.cover_image" alt="" class="compare-img">
-            <div class="card-mask"></div>
-            <div @click="$router.push({path: 'detail', query: { id: item.id, platform: item.platform}})" :class="`go-btn absolute neon-blue`">查看課程詳情</div>
+          </div>
+          <div class="compare-row action">
+            <div @click="goDetail(item)" :class="`go-btn absolute blue`">查看課程詳情</div>
           </div>
           <div class="compare-row">
             <img :src="require(`@/assets/img/${item.platform}.png`)" alt="" class="row-platfom">
@@ -71,6 +77,9 @@
         </div>
         <div v-else-if="type === 1">
           <img :src="item.cover_image" alt="" class="compare-img">
+          <div class="compare-row action">
+            <div @click="goDetail(item)" :class="`go-btn absolute blue`">查看課程詳情</div>
+          </div>
           <div class="compare-chapter">
             <div v-if="item.chapters.length > 0">
               <el-collapse v-model="activeChapter[columnIndex]" @change="handleToggleChapter">
@@ -91,6 +100,9 @@
         </div>
         <div v-else-if="type === 2">
           <img :src="item.cover_image" alt="" class="compare-img">
+          <div class="compare-row action">
+            <div @click="goDetail(item)" :class="`go-btn absolute blue`">查看課程詳情</div>
+          </div>
           <div class="compare-other" v-html="formatContentByPlatform(item)">
           </div>
         </div>
@@ -135,6 +147,15 @@ export default {
       // console.log(val)
     },
 
+    goDetail(item) {
+      if (this.$route.query.id === item.id) {
+        this.$emit('closeDialog')
+      } else {
+        this.$router.push({ path: '/detail/course', query: { id: item.id } })
+        this.$emit('closeDialog')
+      }
+    },
+
     formatContentByPlatform(item) {
       let content = ''
       switch (item.platform) {
@@ -171,7 +192,7 @@ export default {
               你將會學到
             </div>
             ${item.learn
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>
           <div class="block">
@@ -179,7 +200,7 @@ export default {
               適合對象
             </div>
             ${item.object
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>
           <div class="block">
@@ -187,7 +208,7 @@ export default {
               建議背景
             </div>
             ${item.knowledge
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>`
           break
@@ -287,13 +308,13 @@ export default {
     margin-bottom: size-m(5);
     margin-top: size-m(5);
   }
- > * {
-   font-size: 16px;
-   line-height: 1.2;
- }
- .udlite-icon {
-   display: none;
- }
+  > * {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .udlite-icon {
+    display: none;
+  }
 }
 </style>
 <style lang="scss" scoped>
@@ -318,7 +339,7 @@ export default {
 .compare-side {
   width: 98px;
   height: calc(100vh - 64px);
-  background: #F9F9F9;
+  background: #f9f9f9;
   // box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
   position: fixed;
   top: 85px;
@@ -327,7 +348,7 @@ export default {
   color: #000;
   display: grid;
   grid-template-columns: 98px;
-  grid-template-rows: 110px repeat(10, 4rem);
+  grid-template-rows: 110px 2rem repeat(10, 4rem);
 }
 .compare-item {
   width: 154px;
@@ -335,20 +356,21 @@ export default {
   border-right: 1px solid #f1f1f1;
   background-color: #fff;
   position: relative;
-  > div {
+
+  > div:not(.close-btn) {
     display: grid;
-    grid-template-rows: 110px repeat(10, 4rem);
+    grid-template-rows: 110px 2rem repeat(10, 4rem);
   }
 
-  &:hover {
-    .go-btn {
-      opacity: 1;
-      top: 50%;
-    }
-    .card-mask {
-      opacity: 1;
-    }
-  }
+  // &:hover {
+  //   .go-btn {
+  //     opacity: 1;
+  //     top: 50%;
+  //   }
+  //   .card-mask {
+  //     opacity: 1;
+  //   }
+  // }
 }
 
 .compare-img {
@@ -417,22 +439,29 @@ export default {
 }
 
 .close-btn {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  opacity: 0.8;
-  display: none;
-}
+  top: 5px;
+  right: 5px;
+  opacity: 1;
+  // display: none;
+  border-radius: 999px;
+  z-index: 3;
+  background-color: rgba(255, 0, 0, 0.7);
 
-.compare-item {
-  &:hover {
-    .close-btn {
-      display: block;
-    }
+  cursor: pointer;
+  img {
+    width: 50%;
   }
 }
+// .compare-item {
+//   &:hover {
+//     .close-btn {
+//       display: block;
+//     }
+//   }
+// }
 
 .card-mask {
   width: 100%;
@@ -447,23 +476,20 @@ export default {
 }
 
 .go-btn {
-  width: 145px;
-  height: 45px;
+  width: 100%;
+  height: 100%;
   // border: 2px solid #01D8F4;
   // color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 14px;
   position: absolute;
   left: 0;
   right: 0;
   margin: 0 auto;
-  top: 60%;
-  transform: translateY(-100%);
-  border-radius: 50px / 50px;
+  // border-radius: 50px / 50px;
   z-index: 2;
-  opacity: 0;
   cursor: pointer;
   transition: opacity 0.3s, background-color 0.3s, border 0.3s, top 0.5s;
 
@@ -514,6 +540,10 @@ export default {
   .compare-row {
     height: 4rem;
     flex-wrap: wrap;
+
+    &.action {
+      height: 2rem;
+    }
   }
 
   .compare-item {
@@ -526,10 +556,6 @@ export default {
 
   .compare-img {
     min-height: auto;
-  }
-
-  .close-btn {
-    display: block;
   }
 
   .empty {

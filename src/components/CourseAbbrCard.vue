@@ -2,6 +2,7 @@
   <router-link class="course-card flex-at flex-jb" tag="div" :to="`/detail/course?id=${course.id}`">
     <div class="course-img" @click.stop="toggleCollect(course)">
       <img :src="course.cover_image" alt="">
+      <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">
       <div class="collect-btn pink flex-c" v-if="hasLike">
         <!-- 實心 -->
         <div v-if="check_collect(course.is_like)">
@@ -41,7 +42,9 @@ import { addCollectCourse, deleteCollectCourse } from '@/http/api'
 export default {
   name: 'CourseAbbrCard',
   data() {
-    return {}
+    return {
+      is_collect: 2
+    }
   },
   props: {
     course: {
@@ -133,6 +136,15 @@ export default {
     width: 100%;
     height: 60px;
     object-fit: cover;
+  }
+
+  .platform-img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 20px;
   }
 }
 

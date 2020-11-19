@@ -1,7 +1,8 @@
 <template>
-  <div :class="`course-card flex-at flex-jb ${(pattern === 'pick') ? 'pick' : ''} ${isPick ? 'picked' : ''}`">
+  <router-link tag="div" :class="`course-card flex-at flex-jb ${(pattern === 'pick') ? 'pick' : ''} ${isPick ? 'picked' : ''}`" :to="`/detail/course?id=${course.id}`">
     <div class="course-img" @click.stop="toggleCompare(course)">
       <img :src="course.cover_image" alt="">
+      <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">
       <div class="collect-btn yellow flex-c" v-if="hasLike">
       <div v-if="isPick">
         移除比課
@@ -30,7 +31,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -110,7 +111,7 @@ export default {
   // background-color: #fff;
   width: 100%;
   height: 100px;
-  margin: 12px 12px 12px 0;
+  margin: 0px 12px 24px 0;
   position: relative;
   padding-bottom: 15px;
   border-bottom: 1px solid #39405B;
@@ -126,6 +127,14 @@ export default {
     width: 100%;
     height: 60px;
     object-fit: cover;
+  }
+  .platform-img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 20px;
   }
 }
 

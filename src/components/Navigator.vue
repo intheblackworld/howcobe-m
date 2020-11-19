@@ -75,7 +75,7 @@ export default {
       // width: 28px;
     }
     .nav-name {
-      color: #666;
+      color: rgb(249, 121, 16);
       font-weight: bold;
     }
   }

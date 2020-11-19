@@ -77,16 +77,41 @@
     </div>
     <div class="content-container">
       <div v-if="typeIndex === 0">
-        <SwipeCards :courses="collect_courses" @update="$store.dispatch('course/getCollectList')" />
+        <div v-if="collect_courses.length > 0">
+          <SwipeCards :courses="collect_courses" @update="$store.dispatch('course/getCollectList')" />
+        </div>
+        <div v-else class="non-result-title">
+          目前沒有收藏課程
+          <div class="yellow round-big middle btn flex-c" @click="$router.push('/courses')">前往課程列表</div>
+        </div>
       </div>
+
       <div v-if="typeIndex === 1">
-        <CompareLongCard v-for="compare in collect_compare" :key="compare.compare_course_id" :compare="compare" @update="$store.dispatch('course/getCollectCompare')" />
+        <div v-if="collect_compare.length > 0">
+          <CompareLongCard v-for="compare in collect_compare" :key="compare.compare_course_id" :compare="compare" @update="$store.dispatch('course/getCollectCompare')" />
+        </div>
+        <div v-else class="non-result-title">
+          目前沒有收藏比課
+          <div class="yellow round-big middle btn flex-c" @click="$router.push('/compares')">前往比課專區</div>
+        </div>
       </div>
       <div v-if="typeIndex === 2">
-        <VoteLongCard :vote="vote" v-for="vote in result.vote_voter" :key="vote.id"></VoteLongCard>
+        <div v-if="result.vote_voter.length > 0">
+          <VoteLongCard :vote="vote" v-for="vote in result.vote_voter" :key="vote.id"></VoteLongCard>
+        </div>
+        <div v-else class="non-result-title">
+          目前沒有參與投票
+          <div class="yellow round-big middle btn flex-c" @click="$router.push('/votes')">前往投票專區</div>
+        </div>
       </div>
       <div v-if="typeIndex === 3">
+        <div v-if="result.vote_organizer.length > 0">
         <VoteOrganCard :vote="vote" v-for="vote in result.vote_organizer" :key="vote.id"></VoteOrganCard>
+        </div>
+        <div v-else class="non-result-title">
+          目前沒有發起投票
+          <div class="yellow round-big middle btn flex-c" @click="$router.push('/votes')">前往投票專區</div>
+        </div>
       </div>
     </div>
   </div>
@@ -235,7 +260,7 @@ export default {
 
     collect_courses() {
       if (this.collect_list) {
-        return this.collect_list.map(course => ({
+        return this.collect_list.map((course) => ({
           course_id: course.course_id,
           ...course.like_course,
         }))
@@ -287,11 +312,11 @@ export default {
     },
 
     formatCollectCompareData(my_like_compare_course) {
-      return my_like_compare_course.map(item => ({
+      return my_like_compare_course.map((item) => ({
         _id: item._id,
         name: (item.user && item.user.name) || '訪客',
         title: '',
-        platform: _.uniq(item.courses.map(course => course.platform)),
+        platform: _.uniq(item.courses.map((course) => course.platform)),
         price: item.courses.reduce((a, b) => ({ price: a.price + b.price }))
           .price,
         consumers: item.courses.reduce((a, b) => ({
@@ -317,7 +342,7 @@ export default {
       get('/ichannel/url', {
         platform: row.platform,
         platform_id: row.id,
-      }).then(res => {
+      }).then((res) => {
         // console.log(res.url)
         window.open(res.url)
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
@@ -341,7 +366,7 @@ export default {
     },
 
     editUserInfo() {
-      this.$refs.editForm.validate(valid => {
+      this.$refs.editForm.validate((valid) => {
         if (valid) {
           editUserInfo({
             name: this.form.name,
@@ -396,7 +421,7 @@ export default {
     getBuyCourse({
       order_star_time: '20200401',
       order_end_time: moment().format('YYYYMMDD'),
-    }).then(res => {
+    }).then((res) => {
       if (res.error_question) {
         this.buy_course_data = []
       } else {
@@ -530,6 +555,19 @@ export default {
   padding: 5px;
   cursor: pointer;
   color: #fff;
+}
+
+.non-result-title {
+  font-size: 24px;
+  color: #888;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.btn {
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 50%;
 }
 
 /* 螢幕尺寸標準 */

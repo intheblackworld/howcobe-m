@@ -14,6 +14,8 @@ export const getInterestsCourse = ({ limit = 8, page = 1, category }) => {
   return get('/courses', { limit, page, sortway: 'DESC', sortvalue: 'avg_rating', categories: `["${category.join('","')}"]` })
 }
 
+export const getPlatformCourse = () => get('/courses-crossplatform', {})
+
 // 快速搜尋用的搜尋列表
 export const getQuickCourse = () => get('/courses-list', {})
 

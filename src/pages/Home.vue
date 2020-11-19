@@ -1,10 +1,31 @@
 <template>
   <div class="home main">
-    <CategoryList />
+    <div class="slide-section relative flex-c wrap">
+      <div class="animate-slide">
+        <div v-for="slide in slide_list" :key="slide._id +'first'" class="slide-item">
+          <img :src="slide.cover_image" alt="" class="slide-img">
+          <img :src="require(`@/assets/img/${slide.platform}.png`)" class="platform-img" alt="">
+        </div>
+        <div v-for="slide in slide_list" :key="slide._id +'two'" class="slide-item relative">
+          <img :src="slide.cover_image" alt="" class="slide-img">
+          <img :src="require(`@/assets/img/${slide.platform}.png`)" class="platform-img" alt="">
+        </div>
+      </div>
+      <div class="darken-bg pale"></div>
+      <h3 class="slide-subtitle">
+        好課比，比好課
+      </h3>
+      <h3 class="slide-title">
+        整合不同線上課程平台
+        <br />1500多門中文線上課課程
+      </h3>
+    </div>
     <BlockHead title="最新投票" :link="{name: '更多投票', to: '/votes?type=hot'}" />
     <div class="flex">
       <VoteCard v-for="vote in votes.slice(0, 2)" :key="vote.id" :vote="vote" />
     </div>
+    <BlockHead title="隨機課程" :link="{}" />
+    <SwipeCards :courses="platform_courses.slice(0, 4)" />
     <BlockHead title="熱門課程" :link="{name: '更多課程', to: '/courses?type=hot'}" />
     <SwipeCards :courses="hot_courses" />
 
@@ -29,26 +50,108 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import "~@/assets/style/function.scss";
+.slide-section {
+  width: 100vw;
+  min-height: size-m(189);
+  background-color: #1a192e;
+}
+.slide-subtitle {
+  width: 100%;
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 150%;
+  letter-spacing: 0.1em;
+  color: #eee;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 3px #000;
+  position: relative;
+  z-index: 11;
+}
+.slide-title {
+  width: 100%;
+  text-align: center;
+  font-style: normal;
+  font-weight: normal !important;
+  font-size: 18px;
+  line-height: 120%;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 3px #000;
+  color: #fff;
+  position: relative;
+  z-index: 11;
+}
+
+.animate-slide {
+  display: flex;
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  animation: moving 80s linear infinite;
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+@keyframes moving {
+  0% {
+    transform: translateX(0vw);
+  }
+
+  100% {
+    transform: translateX(size(-288 * 12)); // 獲取數量 * 寬度
+  }
+}
+
+.slide-item {
+  width: size-m(220);
+  position: relative;
+  padding: size-m(10);
+  z-index: 10;
+
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background-color: #1d1c26;
+  }
+
+  .platform-img {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border-radius: 35px;
+  }
+}
+</style>
+
 <script>
 // @ is an alias to /src
-import CategoryList from '@/components/CategoryList.vue'
+// import CategoryList from '@/components/CategoryList.vue'
 import BlockHead from '@/components/BlockHead.vue'
 import VoteCard from '@/components/VoteCard.vue'
 import SwipeCards from '@/components/SwipeCards.vue'
 import CompareLongCard from '@/components/CompareLongCard.vue'
 import CourseCard from '@/components/CourseCard.vue'
 import {
+  // searchCourse,
   getVotes,
   getHotCourse,
   getNewCourse,
   getFiveStarCourse,
   getCompareHot,
   getCompareStack,
+  getPlatformCourse,
 } from '@/http/api'
 export default {
   name: 'Home',
   components: {
-    CategoryList,
+    // CategoryList,
     BlockHead,
     VoteCard,
     SwipeCards,
@@ -57,33 +160,49 @@ export default {
   },
   data() {
     return {
+      slide_list: [],
       votes: [],
       hot_courses: [],
       hot_compares: [],
       new_courses: [],
       new_compares: [],
       fivestar_courses: [],
+      plaform_courses: [],
     }
   },
 
   methods: {},
-  mounted() {
-    getVotes({}).then(res => {
+  async mounted() {
+    // const result = await searchCourse({
+    //   page: 1,
+    //   limit: 12,
+    //   search: '',
+    //   sortway: 'DESC',
+    //   category: '',
+    // })
+
+    // this.slide_list = result.courses
+    getVotes({}).then((res) => {
       this.votes = res.voteCompareCourses
     })
-    getHotCourse({ limit: 4 }).then(res => {
+
+    getPlatformCourse().then((res) => {
+      this.platform_courses = res
+      this.slide_list = res
+    })
+    getHotCourse({ limit: 4 }).then((res) => {
       this.hot_courses = res.courses
     })
-    getNewCourse({ limit: 4 }).then(res => {
+    getNewCourse({ limit: 4 }).then((res) => {
       this.new_courses = res.courses
     })
-    getFiveStarCourse({limit: 4}).then(res => {
+    getFiveStarCourse({ limit: 4 }).then((res) => {
       this.fivestar_courses = res.courses
     })
-    getCompareHot({}).then(res => {
+    getCompareHot({}).then((res) => {
       this.hot_compares = res
     })
-    getCompareStack({}).then(res => {
+    getCompareStack({}).then((res) => {
       this.new_compares = res
     })
   },

@@ -75,7 +75,10 @@
     <div v-if="typeIndex === 2" class="container compare-container full">
       <CompareLongCard :dark="true" v-for="compare in new_compares" :key="compare.compare_course_id" :compare="compare" />
     </div>
-    <div class="cart-btn yellow round-big big btn flex-c" v-if="compareCount > 0 || compareCount === 'max'" @click="isDialog = true">查看比課欄</div>
+    <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
+      查看比課
+      <div class="menu-dot" v-show="compareCount">{{compareCount}}</div>
+    </div>
     <transition name="slide-left">
       <CompareDialog v-if="isDialog" @closeDialog="isDialog=false"></CompareDialog>
     </transition> 
@@ -100,6 +103,7 @@ import { info } from '@/info/meta'
 import {
   getCompareHot,
   getCompareStack,
+  addCompareStack,
 } from '@/http/api'
 
 export default {
@@ -300,7 +304,7 @@ export default {
     ...mapState(['pattern', 'search']),
 
     compareCount() {
-      return this.compare_list.length === 5 ? 'max' : this.compare_list.length
+      return this.compare_list.length === 5 ? 'M' : this.compare_list.length
     },
   },
 
@@ -332,6 +336,18 @@ export default {
     changeCategory(index) {
       this.form.page = 1
       this.categoryIndex = index
+    },
+
+    goCompare() {
+      if (this.compareCount > 1 || this.compareCount == 'M') {
+        addCompareStack({
+          course_ids: this.compare_list.map((item) => item.id),
+        }).then((res) => {
+          this.$store.commit('course/setCompareId', res.documents.id)
+        })
+        this.$store.commit('setCompare', true)
+      }
+      this.isDialog = true
     },
 
     transCategory(val) {
@@ -728,6 +744,28 @@ export default {
   bottom: 75px;
 }
 
+.menu-dot {
+  width: 20px;
+  height: 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  font-size: 14px;
+  animation: jump 1s ease-in-out 0s alternate-reverse infinite;
+}
+
+@keyframes jump {
+  to {
+    margin-top: -5px;
+  }
+}
+
 /* 螢幕尺寸標準 */
 /* 小電腦尺寸 */
 @media only screen and (min-device-width: 1025px) and (max-device-width: 1280px) {
@@ -742,7 +780,7 @@ export default {
 /* 手機尺寸 */
 @media screen and (max-width: 767px) {
   .container {
-    padding-top: 20px;
+    padding-top: 0px;
   }
   .filter-block {
     display: block;

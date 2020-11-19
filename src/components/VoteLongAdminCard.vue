@@ -14,7 +14,7 @@
         <div class="subtitle">
           共計<span>{{vote.vote_compare_course.course_ids.length}}</span>門課程正在投票
         </div>
-        <div class="vote-count">
+        <div class="vote-count" v-if="vote.vote_sum_count > 0">
           參與投票: <span>{{vote.vote_sum_count}}人</span>
         </div>
       </div>

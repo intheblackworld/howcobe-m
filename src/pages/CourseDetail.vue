@@ -1,7 +1,8 @@
 <template>
   <div class="detail">
     <div :class="`submit-footer flex-c ${isShowBtn ? 'show' : ''}`">
-      <div class="yellow round-big big btn flex-c" @click="addCompare(current)">加入比課</div>
+      <div class="yellow round-big big btn flex-c" @click="addCompare(current)" v-if="!isPick">加入比課</div>
+      <div class="blue round-big big btn flex-c" @click="removeCompare(current)" v-if="isPick">移除比課</div>
       <div class="red round-big big btn flex-c" @click="goCourse">前往課程</div>
     </div>
     <div class="detail-thumb relative" v-if="!is_fix_thumb">
@@ -10,9 +11,9 @@
       <div class="back-btn" @click="$router.go(-1)">
         <font-awesome :icon="['fa', 'chevron-left']" />
       </div>
-      <div class="share-btn" @click="share(current)">
+      <!-- <div class="share-btn" @click="share(current)">
         <font-awesome :icon="['fa', 'external-link-alt']" />
-      </div>
+      </div> -->
       <div class="collect-btn" @click="toggleCollect(current)">
         <!-- 實心 -->
         <font-awesome :icon="['fa', 'heart']" v-show="check_collect(current.is_like)" />
@@ -34,7 +35,7 @@
         <div class="flex-ac">上課人數: {{current.consumers}}</div>
       </div>
       <div class="thumb-content flex-ac flex-jb">
-        <div class="flex-ac">課程平台: <img :src="require(`@/assets/img/${current.platform}.png`)" alt="" class="thumb-content-img"></div>
+        <div class="flex-ac" v-if="current.platform">課程平台: <img :src="require(`@/assets/img/${current.platform}.png`)" alt="" class="thumb-content-img"></div>
         <div class="flex-ac">上架日期: {{formatTime(current.published_at)}}</div>
       </div>
     </div>
@@ -113,6 +114,13 @@
         </div>
       </div>
     </transition-group>
+    <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
+      查看比課
+      <div class="menu-dot" v-show="compareCount">{{compareCount}}</div>
+    </div>
+    <transition name="slide-left">
+      <CompareDialog v-if="isDialog" @closeDialog="isDialog=false"></CompareDialog>
+    </transition>
   </div>
 </template>
 <style lang="scss">
@@ -533,6 +541,34 @@ img {
   }
 }
 
+.cart-btn {
+  position: fixed;
+  z-index: 10;
+  right: 10px;
+  bottom: 75px;
+}
+
+.menu-dot {
+  width: 20px;
+  height: 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  font-size: 14px;
+  animation: jump 1s ease-in-out 0s alternate-reverse infinite;
+}
+
+@keyframes jump {
+  to {
+    margin-top: -5px;
+  }
+}
 
 /* 螢幕尺寸標準 */
 /* 小電腦尺寸 */
@@ -660,12 +696,13 @@ img {
 // TODO Skeleton 樣式
 // TODO scroll and fix header
 import { get } from '@/http/axios'
-import { addCollectCourse, deleteCollectCourse, searchCourse } from '@/http/api'
+import { addCollectCourse, deleteCollectCourse, searchCourse, addCompareStack, } from '@/http/api'
 import { mapState } from 'vuex'
 import moment from 'moment'
 // import EmptyContent from '@/components/EmptyContent'
 // import ShareLinks from '@/components/ShareLinks.vue'
 import SwipeCards from '@/components/SwipeCards'
+import CompareDialog from '@/components/Dialog/CompareDialog.vue'
 // import EmptyCard from '@/components/EmptyCard'
 import { transCategory } from '@/info/category'
 import { isMobile } from '@/util/device'
@@ -675,6 +712,7 @@ export default {
   data() {
     return {
       isMobile,
+      isDialog: false,
       isShowBtn: false,
       activeChapter: [0],
       interest_list: [],
@@ -685,6 +723,7 @@ export default {
   },
   components: {
     SwipeCards,
+    CompareDialog,
     // EmptyContent,
     // ShareLinks,
     // Card,
@@ -700,7 +739,7 @@ export default {
       sortway: 'DESC',
       sortvalue: 'avg_rating',
       category: this.current.category,
-    }).then(res => {
+    }).then((res) => {
       this.interest_list = res.courses
     })
   },
@@ -809,7 +848,7 @@ export default {
     //   }
     // },
 
-    $route: function() {
+    $route: function () {
       this.$store.dispatch('course/getCourseDetail', {
         id: this.$route.query.id,
       })
@@ -818,15 +857,25 @@ export default {
 
   computed: {
     // 使用对象展开运算符将此对象混入到外部对象中
-    ...mapState('course', ['current']),
+    ...mapState('course', ['current', 'compare_list']),
     ...mapState(['isFetchingData']),
+
+    compareCount() {
+      return this.compare_list.length === 5 ? 'max' : this.compare_list.length
+    },
+
+    isPick() {
+      return (
+        this.compare_list.map(course => course._id).includes(this.current._id)
+      )
+    },
   },
   methods: {
     goCourse() {
       get('/ichannel/url', {
         platform: this.$route.query.platform,
         platform_course_id: this.current.platform_course_id,
-      }).then(res => {
+      }).then((res) => {
         window.open(res.url)
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
       })
@@ -868,7 +917,7 @@ export default {
               你將會學到
             </div>
             ${this.current.learn
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>
           <div class="block">
@@ -876,7 +925,7 @@ export default {
               適合對象
             </div>
             ${this.current.object
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>
           <div class="block">
@@ -884,7 +933,7 @@ export default {
               建議背景
             </div>
             ${this.current.knowledge
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>`
           break
@@ -961,8 +1010,23 @@ export default {
     //   }
     // },
 
+    goCompare() {
+      if (this.compareCount > 1 || this.compareCount == 'M') {
+        addCompareStack({
+          course_ids: this.compare_list.map((item) => item.id),
+        }).then((res) => {
+          this.$store.commit('course/setCompareId', res.documents.id)
+        })
+        this.$store.commit('setCompare', true)
+      }
+      this.isDialog = true
+    },
     addCompare(item) {
       this.$store.dispatch('course/addCompareCourse', item)
+    },
+
+    removeCompare() {
+      this.$store.commit('course/removeCompareCourse', this.current.id)
     },
 
     transName(value) {
