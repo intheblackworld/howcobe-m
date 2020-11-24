@@ -69,7 +69,6 @@
   margin-bottom: 15px;
   text-shadow: 0 2px 3px #000;
   position: relative;
-  z-index: 11;
 }
 .slide-title {
   width: 100%;
@@ -82,7 +81,6 @@
   text-shadow: 0 2px 3px #000;
   color: #fff;
   position: relative;
-  z-index: 11;
 }
 
 .animate-slide {

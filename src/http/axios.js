@@ -154,7 +154,7 @@ axios.interceptors.response.use(
  * @param {Object} params [请求时携带的参数]
  */
 export function get(url, params) {
-  store.commit('setLoading', true)
+  // store.commit('setLoading', true)
   app.$Progress.start()
 
   return new Promise((resolve, reject) => {
@@ -180,12 +180,12 @@ export function get(url, params) {
         // }
       })
       .then((res) => {
-        store.commit('setLoading', false)
+        // store.commit('setLoading', false)
         app.$Progress.finish()
         resolve(res.data)
       })
       .catch((err) => {
-        store.commit('setLoading', false)
+        // store.commit('setLoading', false)
         app.$Progress.fail()
         reject(err.data)
       })
@@ -197,18 +197,18 @@ export function get(url, params) {
  * @param {Object} params [请求时携带的参数]
  */
 export function post(url, params) {
-  store.commit('setLoading', true)
+  // store.commit('setLoading', true)
   app.$Progress.start()
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
       .then((res) => {
-        store.commit('setLoading', false)
+        // store.commit('setLoading', false)
         app.$Progress.finish()
         resolve(res.data)
       })
       .catch((err) => {
-        store.commit('setLoading', false)
+        // store.commit('setLoading', false)
         app.$Progress.fail()
         reject(err.data)
       })
@@ -221,18 +221,18 @@ export function post(url, params) {
  * @param {Object} params [请求时携带的参数]
  */
 export function remove(url, params) {
-  store.commit('setLoading', true)
+  // store.commit('setLoading', true)
   app.$Progress.start()
   return new Promise((resolve, reject) => {
     axios
       .delete(url, params)
       .then((res) => {
-        store.commit('setLoading', false)
+        // store.commit('setLoading', false)
         app.$Progress.finish()
         resolve(res.data)
       })
       .catch((err) => {
-        store.commit('setLoading', false)
+        // store.commit('setLoading', false)
         app.$Progress.fail()
         reject(err.data)
       })

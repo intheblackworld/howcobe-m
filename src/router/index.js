@@ -8,6 +8,8 @@ import AdminLayout from '@/layouts/Admin.vue'
 import LoginLayout from '@/layouts/Login.vue'
 import is_need_access from './access_check'
 
+import { isPC } from '@/util/device.js'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -106,6 +108,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  if (isPC) {
+    window.location.href = window.location.href.replace('m.howcobe.com', 'howcobe.com')
+  }
   const { token, refresh_token } = to.query
   if (!to.matched.length) {
     window.location = '/404'
