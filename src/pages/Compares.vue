@@ -532,8 +532,8 @@ export default {
 .compare {
   padding-top: 98px;
   min-height: calc(100vh - 63px);
-  // position: relative;
-  // z-index: 2;
+  position: relative;
+  z-index: 2;
   // transition: all 0.4s;
   background: #2c2b45;
 }
@@ -580,7 +580,7 @@ export default {
 
   &.full {
     width: 100%;
-    padding: 60px 0;
+    padding: 40px 0;
   }
 }
 

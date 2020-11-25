@@ -111,7 +111,7 @@ export default {
   // background-color: #fff;
   width: 100%;
   height: 100px;
-  margin: 0px 12px 24px 0;
+  margin: 12px 12px 24px 0;
   position: relative;
   padding-bottom: 15px;
   border-bottom: 1px solid #39405B;
