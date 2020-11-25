@@ -489,11 +489,10 @@ export default {
   // padding-top: 98px;
   padding: 0;
   height: calc(100vh - 60px - 63px);
-  position: absolute;
-  top: 60px;
-  bottom: 63px;
-  z-index: 2;
-  // transition: all 0.4s;
+  // position: absolute;
+  margin-top: 60px;
+  margin-bottom: 63px;
+  // z-index: 2;
   overflow-y: scroll;
 }
 

@@ -195,6 +195,13 @@
 .detail {
   // background-color: rgb(245, 245, 245);
   // margin-top: 40px;
+  padding: 0;
+  height: calc(100vh);
+  // position: absolute;
+  // top: 0px;
+  // bottom: 63px;
+  z-index: 2;
+  overflow-y: scroll;
 }
 
 .detail-thumb {

@@ -8,18 +8,21 @@
         {{category.label}}
       </div>
     </div>
-    <div class="vote-container" v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="50">
-      <div v-if="result.numOfResults > 0">
-        <!-- <div class="card-wrap" v-for="item in result.votes" :key="item.title">
+    <div class="vote-container">
+      <div v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="50">
+        <div v-if="result.numOfResults > 0">
+          <!-- <div class="card-wrap" v-for="item in result.votes" :key="item.title">
           <Card :inRow="false" :item="item" />
         </div> -->
-        <LongCard :inRow="false" :vote="vote" v-for="vote in result.votes" :key="vote.id"></LongCard>
-      </div>
-      <div v-else-if="result.numOfResults === 0" class="flex-c">
-        <div class="non-result-title">
-          找不到你搜尋的投票，請重新搜尋
+          <LongCard :inRow="false" :vote="vote" v-for="vote in result.votes" :key="vote.id"></LongCard>
+        </div>
+        <div v-else-if="result.numOfResults === 0" class="flex-c">
+          <div class="non-result-title">
+            找不到你搜尋的投票，請重新搜尋
+          </div>
         </div>
       </div>
+
       <!-- <el-pagination v-if="result.numOfResults > 0" class="pagination flex-c" background layout="prev, pager, next" :total="result.numOfResults" :page-size="form.limit" :current-page="Number(result.currentPage)" @current-change="changePage">
       </el-pagination> -->
     </div>
@@ -387,6 +390,7 @@ export default {
   top: 60px;
   bottom: 63px;
   z-index: 2;
+  padding-bottom: 60px;
   // transition: all 0.4s;
   overflow-y: scroll;
 }

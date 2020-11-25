@@ -265,8 +265,13 @@
 @import '~@/assets/style/function.scss';
 
 .detail {
-  // background-color: rgb(245, 245, 245);
-  // margin-top: 40px;
+  padding: 0;
+  height: calc(100vh);
+  // position: absolute;
+  // top: 0px;
+  // bottom: 63px;
+  z-index: 2;
+  overflow-y: scroll;
 }
 
 .detail-thumb {
@@ -696,7 +701,12 @@ img {
 // TODO Skeleton 樣式
 // TODO scroll and fix header
 import { get } from '@/http/axios'
-import { addCollectCourse, deleteCollectCourse, searchCourse, addCompareStack, } from '@/http/api'
+import {
+  addCollectCourse,
+  deleteCollectCourse,
+  searchCourse,
+  addCompareStack,
+} from '@/http/api'
 import { mapState } from 'vuex'
 import moment from 'moment'
 // import EmptyContent from '@/components/EmptyContent'
@@ -865,9 +875,9 @@ export default {
     },
 
     isPick() {
-      return (
-        this.compare_list.map(course => course._id).includes(this.current._id)
-      )
+      return this.compare_list
+        .map((course) => course._id)
+        .includes(this.current._id)
     },
   },
   methods: {

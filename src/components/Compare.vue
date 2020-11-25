@@ -352,7 +352,7 @@ export default {
 }
 .compare-item {
   width: 154px;
-  height: calc(100vh - 64px);
+  // height: calc(100vh - 64px);
   border-right: 1px solid #f1f1f1;
   background-color: #fff;
   position: relative;
