@@ -198,7 +198,8 @@ export default {
 .dialog {
   position: fixed;
   top: 0;
-  width: 100vw;
+  left: 0;
+  width: 90vw;
   height: 100vh;
   background-color: rgb(0, 0, 0, 0.7);
   z-index: 1000;

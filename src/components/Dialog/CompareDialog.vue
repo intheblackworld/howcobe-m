@@ -260,7 +260,7 @@ export default {
   position: absolute;
   top: 0;
   z-index: 100;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 
 .dialog-header {

@@ -303,6 +303,10 @@ export default {
   margin: size-m(14);
   padding-bottom: 120px;
 
+  > div:nth-last-child(1) {
+    padding-bottom: 120px;
+  }
+
   .udlite-heading-xl {
     font-size: size-m(16);
     margin-bottom: size-m(5);
@@ -328,6 +332,7 @@ export default {
 
 .compare-grid {
   display: grid;
+  height: calc(100vh - 64px);
   grid-template-columns: repeat(5, 154px);
   position: fixed;
   top: 85px;
@@ -503,6 +508,9 @@ export default {
 .compare-chapter {
   padding: 0 15px;
   margin-bottom: 120px;
+  > div {
+    padding-bottom: 60px;
+  }
 }
 
 .empty-desc {
