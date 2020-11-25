@@ -199,7 +199,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  width: 90vw;
+  width: 100vw;
   height: 100vh;
   background-color: rgb(0, 0, 0, 0.7);
   z-index: 1000;
@@ -346,7 +346,7 @@ export default {
 }
 
 .form {
-  padding-bottom: 200px;
+  padding-bottom: 160px;
   > div {
     width: 45%;
   }
