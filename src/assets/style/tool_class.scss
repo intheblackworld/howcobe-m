@@ -1,7 +1,8 @@
 .main {
   padding-top: 60px;
   padding-bottom: 93px;
-  overflow: hidden;
+  height: calc(100vh - 153px);
+  overflow-y: scroll;
 
   &.no-mt {
     margin-top: 0;
