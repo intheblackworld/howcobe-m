@@ -3,9 +3,14 @@
   padding-bottom: 93px;
   height: calc(100vh - 153px);
   overflow-y: scroll;
+  overflow-x: hidden;
 
   &.no-mt {
     margin-top: 0;
+  }
+
+  &.no-tab {
+    height: calc(100vh - 63px);
   }
 }
 .flex-c {
