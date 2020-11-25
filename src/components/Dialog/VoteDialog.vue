@@ -346,6 +346,7 @@ export default {
 }
 
 .form {
+  padding-bottom: 200px;
   > div {
     width: 45%;
   }
