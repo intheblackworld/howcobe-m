@@ -534,7 +534,7 @@ export default {
   min-height: calc(100vh - 63px);
   // position: relative;
   // z-index: 2;
-  transition: all 0.4s;
+  // transition: all 0.4s;
   background: #2c2b45;
 }
 

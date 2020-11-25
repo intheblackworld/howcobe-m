@@ -59,6 +59,13 @@
 
 <style lang="scss" scoped>
 @import '~@/assets/style/function.scss';
+.home {
+  padding-top: 98px;
+  min-height: calc(100vh - 63px);
+  // position: relative;
+  // z-index: 2;
+  // transition: all 0.4s;
+}
 .slide-section {
   width: 100vw;
   min-height: size-m(189);
