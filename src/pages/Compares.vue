@@ -575,6 +575,7 @@ export default {
 
 .compare-container {
   width: 74%;
+  padding: 40px 0;
   padding: 12px;
   margin: 0;
 
