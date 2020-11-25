@@ -60,6 +60,7 @@
 <style lang="scss" scoped>
 @import '~@/assets/style/function.scss';
 .home {
+  padding-bottom: 153px;
   // padding-top: 98px;
   // min-height: calc(100vh - 63px);
   // position: relative;
