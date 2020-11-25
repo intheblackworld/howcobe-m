@@ -265,7 +265,7 @@
 @import '~@/assets/style/function.scss';
 
 .detail {
-  padding: 0;
+  padding-bottom: 60px;
   height: calc(100vh);
   // position: absolute;
   // top: 0px;
