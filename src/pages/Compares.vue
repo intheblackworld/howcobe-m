@@ -530,7 +530,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/function.scss';
 .compare {
-  padding-top: 60px;
+  padding-top: 98px;
   min-height: calc(100vh - 63px);
   // position: relative;
   // z-index: 2;

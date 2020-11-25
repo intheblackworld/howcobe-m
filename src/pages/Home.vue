@@ -1,5 +1,5 @@
 <template>
-  <div class="home main">
+  <div class="home main no-tab">
     <div class="slide-section relative flex-c wrap">
       <div class="animate-slide">
         <div v-for="slide in slide_list" :key="slide._id +'first'" class="slide-item">
