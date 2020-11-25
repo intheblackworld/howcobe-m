@@ -543,7 +543,7 @@ export default {
   width: 26%;
   height: calc(100vh - 60px);
   padding: 0 8px 0 16px;
-  padding-bottom: 200px;
+  padding-bottom: 500px;
   background: #0c172f;
   top: calc(60px + 34px);
   left: 0;

@@ -500,7 +500,7 @@ export default {
   width: 26%;
   height: calc(100vh - 60px - 63px);
   padding: 0 8px 0 16px;
-  padding-bottom: 40px;
+  padding-bottom: 200px;
   background: #f9f9f9;
   top: 60px;
   left: 0;
