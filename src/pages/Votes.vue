@@ -8,7 +8,7 @@
         {{category.label}}
       </div>
     </div>
-    <div class="container vote-container" v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="50">
+    <div class="vote-container" v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="50">
       <div v-if="result.numOfResults > 0">
         <!-- <div class="card-wrap" v-for="item in result.votes" :key="item.title">
           <Card :inRow="false" :item="item" />
@@ -380,12 +380,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/style/function.scss';
-.course {
-  margin-top: 60px;
-  min-height: calc(100vh - 60px);
-  position: relative;
-  z-index: 29;
-  transition: all 0.4s;
+.vote {
+  padding: 0;
+  height: calc(100vh - 60px - 63px);
+  position: absolute;
+  top: 60px;
+  bottom: 63px;
+  z-index: 2;
+  // transition: all 0.4s;
+  overflow-y: scroll;
 }
 
 .vote-container {

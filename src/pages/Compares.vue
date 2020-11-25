@@ -19,7 +19,7 @@
         最新
       </div>
     </div>
-    <div v-if="typeIndex === 0" class="container compare-container">
+    <div v-if="typeIndex === 0" class="compare-container">
       <div v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="20">
         <div v-if="result.numOfResults > 0">
           <LongCard :course="course" v-for="course in result.courses" :key="course.id" :dark="true"></LongCard>
@@ -577,7 +577,7 @@ export default {
 .compare-container {
   width: 74%;
   padding: 40px 0;
-  padding: 12px;
+  padding: 40px 12px;
   margin: 0;
 
   &.full {
