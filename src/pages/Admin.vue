@@ -402,7 +402,7 @@ export default {
       return findBank(val)[0].label
     },
     logout() {
-      logout.bind(this)(this, false)
+      logout.bind(this)(this, true)
     },
   },
 
