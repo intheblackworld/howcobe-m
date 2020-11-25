@@ -505,8 +505,8 @@ export default {
   background: #f9f9f9;
   top: 60px;
   left: 0;
-  z-index: 1;
-  overflow-y: scroll;
+  z-index: 10;
+  overflow: scroll;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
