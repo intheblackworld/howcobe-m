@@ -1,7 +1,8 @@
 <template>
   <div class="navigator fixed frost flex">
     <router-link tag="div" :to="nav.to" :class="`nav-item flex-c wrap ${isActivePage(nav.to) ? 'active' : ''}`" v-for="nav in nav_list" :key="`nav-${nav.name}`">
-      <img :src="nav.icon" alt="" class="nav-icon">
+      <img :src="nav.icon_active" alt="" class="nav-icon" v-if="isActivePage(nav.to)">
+      <img :src="nav.icon" alt="" class="nav-icon" v-if="!isActivePage(nav.to)">
       <div class="nav-name">{{nav.name}}</div>
     </router-link>
   </div>
@@ -17,26 +18,31 @@ export default {
         {
           name: '首頁',
           icon: require('@/assets/img/icons/home.png'),
+          icon_active: require('@/assets/img/icons/home_active.png'),
           to: '/home',
         },
         {
           name: '課程',
           icon: require('@/assets/img/icons/course.png'),
+          icon_active: require('@/assets/img/icons/course_active.png'),
           to: '/courses',
         },
         {
           name: '比課',
           icon: require('@/assets/img/icons/compare.png'),
+          icon_active: require('@/assets/img/icons/compare_active.png'),
           to: '/compares',
         },
         {
           name: '投票',
           icon: require('@/assets/img/icons/vote.png'),
+          icon_active: require('@/assets/img/icons/vote_active.png'),
           to: '/votes',
         },
         {
           name: '個人',
           icon: require('@/assets/img/icons/admin.png'),
+          icon_active: require('@/assets/img/icons/admin_active.png'),
           to: '/admin',
         },
       ],

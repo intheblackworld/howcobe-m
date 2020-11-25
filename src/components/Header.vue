@@ -1,7 +1,7 @@
 <template>
   <div class="header fixed dark frost flex-c">
     <div class="search">
-      <input ref="input" type="text" class="search-input" :placeholder="`${pattern === 'compare' ? '比出最適合你的課程' : '尋找你感興趣的課程'}`" @click="focus" :value="search" @change="updateSearch" @keypress="searchByEnter">
+      <input ref="input" type="text" class="search-input" :placeholder="`${pattern === 'compare' ? '比出最適合你的課程' : '尋找你感興趣的課程'}`" @click="focus" v-model="search" @change="updateSearch" @keypress="searchByEnter">
     </div>
     <router-link tag="div" to="/" class="logo">
       <img src="../assets/img/nav-logo-2.png" alt="">
@@ -28,7 +28,8 @@ export default {
       this.$emit('focusSearch')
     },
     searchByEnter(e) {
-      console.log(e.keyCode)
+      // console.log(e.keyCode)
+      // console.log(this.search, 'searchVal')
       if (e.keyCode === 13) {
         this.$store.commit('updateSearch', this.search)
         if (this.$route.path.includes('/home')) {

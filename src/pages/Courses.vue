@@ -296,7 +296,7 @@ export default {
       this.form.page = 1
       this.result = {
         numOfResults: 0,
-        courses: []
+        courses: [],
       }
       this.category = category.value
       // this.categoryIndex = index
@@ -392,7 +392,6 @@ export default {
       //     })
       //     break
       // }
-
       if (this.search) {
         this.form.search = this.search
       }
@@ -606,7 +605,12 @@ export default {
   }
 
   .non-result-title {
+    font-size: 20px;
     color: #eee;
+    margin-top: 100px;
+    padding: 0 20px;
+    line-height: 1.3;
+    text-align: center;
   }
 }
 

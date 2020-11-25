@@ -11,7 +11,8 @@ html,
 body {
   overflow-x: hidden;
   *::-webkit-scrollbar {
-    // display: none;
+    width: 5px;
+    background-color: red;
   }
 
   * {
@@ -92,8 +93,8 @@ body {
   html,
   body {
     overflow-x: hidden;
-    *::-webkit-scrollbar {
-      display: none;
-    }
+    // *::-webkit-scrollbar {
+    //   display: none;
+    // }
   }
 }

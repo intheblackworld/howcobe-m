@@ -14,7 +14,7 @@
       </div>
       <div class="action">
         <!-- <div class="yellow round-big middle btn flex-c" @click="addCompare(compare.courses)">參考比較</div> -->
-        <div class="pink round-big middle btn flex-c" @click="deleteCompareToCollect(compare.compare_course_id)">移除收藏</div>
+        <div class="pink round-big middle btn flex-c" @click="deleteCompareToCollect(compare.search_compare_course_id)">移除收藏</div>
       </div>
     </div>
   </div>
@@ -54,6 +54,7 @@ export default {
           message: '已移除此比課',
           type: 'success',
         })
+        console.log('update')
         this.$emit('update')
       })
     },

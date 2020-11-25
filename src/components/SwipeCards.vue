@@ -1,15 +1,15 @@
 <template>
   <div class="course-swipe">
-    <router-link class="course-card flex-at flex-jb" tag="div" :to="`/detail/course?id=${course.id}`" v-for="course in courses" :key="course.id">
-      <div class="course-img" @click.stop="toggleCollect(course)">
+    <router-link class="course-card flex-at flex-jb" tag="div" :to="`/detail/course?id=${course.id}`" v-for="(course, index) in courses" :key="course.id">
+      <div class="course-img" @click.stop="toggleCollect(course, index)">
         <img :src="course.cover_image" alt="">
         <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">
         <div class="collect-btn pink flex-c" v-if="hasLike">
           <!-- 實心 -->
-          <div v-if="check_collect(course.is_like)">
+          <div v-if="course.is_like">
             移除收藏
           </div>
-          <div v-if="!check_collect(course.is_like)">
+          <div v-if="!course.is_like">
             加入收藏
           </div>
         </div>
@@ -77,27 +77,28 @@ export default {
       return length_list.reduce((a, b) => a + b, 0)
     },
 
-    check_collect(is_like) {
-      if (this.is_collect === '') {
-        return is_like
-      } else if (this.is_collect === 1) {
-        return is_like || true
-      } else if (this.is_collect === 2) {
-        return false
-      }
-    },
+    // check_collect(is_like) {
+    //   if (this.is_collect === '') {
+    //     return is_like
+    //   } else if (this.is_collect === 1) {
+    //     return is_like || true
+    //   } else if (this.is_collect === 2) {
+    //     return false
+    //   }
+    // },
 
-    toggleCollect(course) {
+    toggleCollect(course, index) {
       if (this.$store.state.isFetchingData) {
         return
       }
-      if (this.check_collect(course.is_like)) {
+      if (course.is_like) {
         deleteCollectCourse(course.id).then(() => {
           this.$message({
             message: '已移除此課程',
             type: 'success',
           })
-          this.is_collect = 2
+          // this.is_collect = 2
+          this.courses[index].is_like = false
         })
       } else {
         addCollectCourse(course.id).then(() => {
@@ -105,7 +106,8 @@ export default {
             message: '已收藏此課程',
             type: 'success',
           })
-          this.is_collect = 1
+          // this.is_collect = 1
+          this.courses[index].is_like = true
         })
       }
     },

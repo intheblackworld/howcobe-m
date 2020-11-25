@@ -1,20 +1,19 @@
 <template>
   <div class="admin">
-    <div class="detail-thumb relative">
-      <el-dialog title="修改個人資料" width="90%" :visible.sync="isEditDialog">
-        <el-form :model="form" :rules="editUserInfoRules" ref="editForm">
-          <el-form-item label="姓名" prop="name" label-width="120px">
-            <el-input placeholder="姓名" v-model="form.name" autocomplete="off" :disabled="$store.state.isFetchingData" />
-          </el-form-item>
+    <el-dialog title="修改個人資料" width="90%" :visible.sync="isEditDialog">
+      <el-form :model="form" :rules="editUserInfoRules" ref="editForm">
+        <el-form-item label="姓名" prop="name" label-width="120px">
+          <el-input placeholder="姓名" v-model="form.name" autocomplete="off" :disabled="$store.state.isFetchingData" />
+        </el-form-item>
 
-          <el-form-item label="感興趣課程" label-width="120px" prop="interests">
-            <el-select multiple placeholder="選擇你感興趣的課程" v-model="form.interests" :disabled="$store.state.isFetchingData">
-              <el-option v-for="item in category_list" :key="item.value" :label="item.label" :value="item.value" :disabled="form.interests.length >= 5">
-              </el-option>
-            </el-select>
-            (至多五項)
-          </el-form-item>
-          <!-- <el-form-item
+        <el-form-item label="感興趣課程" label-width="120px" prop="interests">
+          <el-select multiple placeholder="選擇你感興趣的課程" v-model="form.interests" :disabled="$store.state.isFetchingData">
+            <el-option v-for="item in category_list" :key="item.value" :label="item.label" :value="item.value" :disabled="form.interests.length >= 5">
+            </el-option>
+          </el-select>
+          (至多五項)
+        </el-form-item>
+        <!-- <el-form-item
             label="銀行代號"
             prop="bank_code"
             label-width="120px"
@@ -47,12 +46,13 @@
               :disabled="$store.state.isFetchingData"
             />
           </el-form-item> -->
-        </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="isEditDialog = false" style="margin-right: 15px">取消</el-button>
-          <el-button type="primary" :disabled="$store.state.isFetchingData" @click="editUserInfo">確定</el-button>
-        </span>
-      </el-dialog>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="isEditDialog = false" style="margin-right: 15px">取消</el-button>
+        <el-button type="primary" :disabled="$store.state.isFetchingData" @click="editUserInfo">確定</el-button>
+      </span>
+    </el-dialog>
+    <div class="detail-thumb relative">
       <div class="darken-bg purple-bg frost">
         <div class="title">個人資訊&nbsp;&nbsp;&nbsp;&nbsp;
           <font-awesome :icon="['fa', 'pen-alt']" class="icon" @click="isEditDialog = true" />
@@ -106,7 +106,7 @@
       </div>
       <div v-if="typeIndex === 3">
         <div v-if="result.vote_organizer.length > 0">
-        <VoteOrganCard :vote="vote" v-for="vote in result.vote_organizer" :key="vote.id"></VoteOrganCard>
+          <VoteOrganCard :vote="vote" v-for="vote in result.vote_organizer" :key="vote.id"></VoteOrganCard>
         </div>
         <div v-else class="non-result-title">
           目前沒有發起投票
@@ -558,9 +558,11 @@ export default {
 }
 
 .non-result-title {
-  font-size: 24px;
+  font-size: 20px;
   color: #888;
   margin-top: 100px;
+  padding: 0 20px;
+  line-height: 1.3;
   text-align: center;
 }
 

@@ -24,8 +24,8 @@
     <div class="flex">
       <VoteCard v-for="vote in votes.slice(0, 2)" :key="vote.id" :vote="vote" />
     </div>
-    <BlockHead title="隨機課程" :link="{}" />
-    <SwipeCards :courses="platform_courses.slice(0, 4)" />
+    <!-- <BlockHead title="隨機課程" :link="false" />
+    <SwipeCards :courses="platform_courses.slice(0, 4)" /> -->
     <BlockHead title="熱門課程" :link="{name: '更多課程', to: '/courses?type=hot'}" />
     <SwipeCards :courses="hot_courses" />
 
@@ -47,11 +47,18 @@
     <div class="flex scroll-x">
       <CourseCard v-for="course in fivestar_courses" :key="course.id" :course="course" />
     </div>
+    <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
+      查看比課
+      <div class="menu-dot" v-show="compareCount">{{compareCount}}</div>
+    </div>
+    <transition name="slide-left">
+      <CompareDialog v-if="isDialog" @closeDialog="isDialog=false"></CompareDialog>
+    </transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import "~@/assets/style/function.scss";
+@import '~@/assets/style/function.scss';
 .slide-section {
   width: 100vw;
   min-height: size-m(189);
@@ -126,6 +133,35 @@
     border-radius: 35px;
   }
 }
+
+.cart-btn {
+  position: fixed;
+  z-index: 10;
+  right: 10px;
+  bottom: 75px;
+}
+
+.menu-dot {
+  width: 20px;
+  height: 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  font-size: 14px;
+  animation: jump 1s ease-in-out 0s alternate-reverse infinite;
+}
+
+@keyframes jump {
+  to {
+    margin-top: -5px;
+  }
+}
 </style>
 
 <script>
@@ -136,6 +172,7 @@ import VoteCard from '@/components/VoteCard.vue'
 import SwipeCards from '@/components/SwipeCards.vue'
 import CompareLongCard from '@/components/CompareLongCard.vue'
 import CourseCard from '@/components/CourseCard.vue'
+import { mapState } from 'vuex'
 import {
   // searchCourse,
   getVotes,
@@ -145,7 +182,9 @@ import {
   getCompareHot,
   getCompareStack,
   getPlatformCourse,
+  addCompareStack,
 } from '@/http/api'
+import CompareDialog from '@/components/Dialog/CompareDialog.vue'
 export default {
   name: 'Home',
   components: {
@@ -155,6 +194,7 @@ export default {
     SwipeCards,
     CompareLongCard,
     CourseCard,
+    CompareDialog,
   },
   data() {
     return {
@@ -164,12 +204,34 @@ export default {
       hot_compares: [],
       new_courses: [],
       new_compares: [],
+      platform_courses: [],
       fivestar_courses: [],
       plaform_courses: [],
+
+      isDialog: false,
     }
   },
 
-  methods: {},
+  methods: {
+    goCompare() {
+      if (this.compareCount > 1 || this.compareCount == 'M') {
+        addCompareStack({
+          course_ids: this.compare_list.map((item) => item.id),
+        }).then((res) => {
+          this.$store.commit('course/setCompareId', res.documents.id)
+        })
+        this.$store.commit('setCompare', true)
+      }
+      this.isDialog = true
+    },
+  },
+
+  computed: {
+    ...mapState('course', ['compare_list']),
+    compareCount() {
+      return this.compare_list.length === 5 ? 'M' : this.compare_list.length
+    },
+  },
   async mounted() {
     // const result = await searchCourse({
     //   page: 1,

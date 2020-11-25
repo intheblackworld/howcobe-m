@@ -35,7 +35,7 @@
                   {{course.title}}
                 </div>
               </div>
-              <div class="rank-bar relative">
+              <div class="rank-bar relative" :style="`width: ${countBarWidth((detail_context.votenumber[index]))}%`">
                 <div class="rank-vote">
                   {{detail_context.votenumber[index]}} 票
                 </div>
@@ -588,7 +588,8 @@ img {
     text-align: right;
     position: absolute;
     top: 15px;
-    right: -60px;
+    right: 0px;
+    white-space: nowrap;
   }
 
   .btn {
@@ -875,6 +876,9 @@ export default {
     // 使用对象展开运算符将此对象混入到外部对象中
     ...mapState('vote', ['currents', 'detail_context']),
     ...mapState(['isFetchingData']),
+    totalVote() {
+      return this.detail_context.votenumber.reduce((a, b) => a + b, 0)
+    },
     current() {
       return this.currents[this.course_index]
     },
@@ -1058,6 +1062,10 @@ export default {
         })
       })
     },
+
+    countBarWidth(votes) {
+      return (votes / this.totalVote) * 98 + 2
+    }
   },
 
   destroyed() {

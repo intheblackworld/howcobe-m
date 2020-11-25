@@ -99,29 +99,29 @@ export default {
     }
   },
 
-  jsonld() {
-    return this.result.votes.map((course, index) => ({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      url: 'https://howcobe.com',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: index + 1,
-          // item: {
-          //   '@type': 'Course',
-          //   url: `https://howcobe.com/detail?id=${course.id}&platform=${course.platform}`,
-          //   name: course.title,
-          //   description: course.description,
-          //   provider: {
-          //     '@type': 'Organization',
-          //     name: course.lecturers[0].name,
-          //   },
-          // },
-        },
-      ],
-    }))
-  },
+  // jsonld() {
+  //   return this.result.votes.map((course, index) => ({
+  //     '@context': 'https://schema.org',
+  //     '@type': 'ItemList',
+  //     url: 'https://howcobe.com',
+  //     itemListElement: [
+  //       {
+  //         '@type': 'ListItem',
+  //         position: index + 1,
+  //         // item: {
+  //         //   '@type': 'Course',
+  //         //   url: `https://howcobe.com/detail?id=${course.id}&platform=${course.platform}`,
+  //         //   name: course.title,
+  //         //   description: course.description,
+  //         //   provider: {
+  //         //     '@type': 'Organization',
+  //         //     name: course.lecturers[0].name,
+  //         //   },
+  //         // },
+  //       },
+  //     ],
+  //   }))
+  // },
   data() {
     return {
       platform_list: [
@@ -147,7 +147,7 @@ export default {
       },
       showCourse: true,
       pageIndex: 1,
-      
+
       category: 'all',
       category_list,
       tabIndex: 0,
@@ -170,6 +170,9 @@ export default {
 
   watch: {
     $route() {
+      this.getVotes()
+    },
+    search() {
       this.getVotes()
     },
     category() {
@@ -229,7 +232,7 @@ export default {
     },
 
     ...mapState('vote', ['vote_list']),
-    ...mapState(['pattern']),
+    ...mapState(['pattern', 'search']),
 
     ...mapGetters('user', ['isLogin', 'hasInterest']),
   },
@@ -292,7 +295,7 @@ export default {
       this.form.page = 1
       this.result = {
         numOfResults: 0,
-        votes: []
+        votes: [],
       }
       this.category = category.value
       this.form.category = category.value
@@ -317,22 +320,37 @@ export default {
     },
 
     async getVotes() {
-      let addon
-      switch (this.type) {
-        default:
-          if (this.$route.query.search) {
-            this.form.search = this.$route.query.search
-          }
-
-          // if (this.$route.query.category) {
-          //   this.form.category = this.transCategory(this.$route.query.category)
-          // }
-          addon = await this.$store.dispatch('vote/getVotes', {
-            ...this.form,
-          })
-          console.log(addon)
-          break
+      this.result = {
+        votes: [],
+        currentPage: 0,
+        numOfResults: -1,
+        pages: 1,
       }
+      this.form.page = 1
+      this.form.limit = 12
+      if (this.search) {
+        this.form.search = this.search
+      }
+
+      if (this.category) {
+        this.form.category = this.category
+      }
+      if (this.sortvalue) {
+        this.form.sortvalue = this.sortvalue.type
+      }
+      // switch (this.type) {
+      //   default:
+      //     if (this.$route.query.search) {
+      //       this.form.search = this.$route.query.search
+      //     }
+
+      // if (this.$route.query.category) {
+      //   this.form.category = this.transCategory(this.$route.query.category)
+      // }
+      const addon = await this.$store.dispatch('vote/getVotes', {
+        ...this.form,
+      })
+      // }
       this.result = {
         ...addon,
         votes: [...this.result.votes, ...addon.voteCompareCourses],
@@ -383,7 +401,7 @@ export default {
 
 .tab-container {
   width: 100vw;
-  height: 34px;
+  height: 38px;
   top: 60px;
   left: 0;
   z-index: 10;
@@ -396,7 +414,7 @@ export default {
   display: inline-block;
   min-width: 80px;
   margin-right: 20px;
-  font-size: 14px;
+  font-size: size-m(16);
   line-height: 100%;
   text-align: center;
   letter-spacing: 0.02em;
@@ -552,9 +570,12 @@ export default {
 }
 
 .non-result-title {
-  font-size: 24px;
+  font-size: 20px;
   color: #888;
   margin-top: 100px;
+  padding: 0 20px;
+  line-height: 1.3;
+  text-align: center;
 }
 
 /* 螢幕尺寸標準 */

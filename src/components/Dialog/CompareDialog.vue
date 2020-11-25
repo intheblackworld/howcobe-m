@@ -225,7 +225,7 @@ export default {
           type: 'success',
         })
         this.isVoteDialog = false
-        this.$store.commit('course/setCompareCourse', [])
+        // this.$store.commit('course/setCompareCourse', [])
       })
     },
 

@@ -540,9 +540,9 @@ export default {
 
 .sidebar {
   width: 26%;
-  height: calc(100vh - 60px - 63px);
+  height: calc(100vh - 60px);
   padding: 0 8px 0 16px;
-  padding-bottom: 40px;
+  padding-bottom: 103px;
   background: #0c172f;
   top: calc(60px + 34px);
   left: 0;
@@ -597,7 +597,7 @@ export default {
 
 .tab-container {
   width: 100vw;
-  height: 34px;
+  height: 38px;
   top: 60px;
   left: 0;
   z-index: 10;
@@ -732,9 +732,12 @@ export default {
 }
 
 .non-result-title {
-  font-size: 24px;
+  font-size: 20px;
   color: #888;
   margin-top: 100px;
+  padding: 0 20px;
+  line-height: 1.3;
+  text-align: center;
 }
 
 .cart-btn {

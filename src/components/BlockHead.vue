@@ -3,7 +3,7 @@
     <div class="title">
       {{title}}
     </div>
-    <router-link tag="div" class="link flex-c" :to="link.to">
+    <router-link tag="div" class="link flex-c" :to="link.to" v-if="link">
       {{link.name}}
       <img src="@/assets/img/icons/chevron-right.png" alt="">
     </router-link>
