@@ -8,10 +8,18 @@
         {{cate.label}}
       </div>
     </div>
-    <div class="container course-container" v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="20">
-      <div v-if="result.numOfResults > 0">
-        <LongCard :course="course" v-for="course in result.courses" :key="course.id" @update="getCourse"></LongCard>
+    <div class="container course-container">
+      <div v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+        <div v-if="result.numOfResults > 0">
+          <LongCard :course="course" v-for="course in result.courses" :key="course.id" @update="getCourse"></LongCard>
+        </div>
+        <div v-else-if="result.numOfResults === 0" class="flex-c">
+          <div class="non-result-title">
+            找不到你搜尋的課程，請重新搜尋
+          </div>
+        </div>
       </div>
+
       <!-- <div class="content-head flex-ab flex-jb">
         <div class="left flex-ab">
           <div class="head-title">{{pattern === 'compare' ? '比課程' : '課程列表'}}</div>
@@ -50,11 +58,7 @@
           <EmptyLongCard :inRow="true"></EmptyLongCard>
         </div>
       </div> -->
-      <div v-else-if="result.numOfResults === 0" class="flex-c">
-        <div class="non-result-title">
-          找不到你搜尋的課程，請重新搜尋
-        </div>
-      </div>
+
       <!-- <el-pagination v-if="result.numOfResults > 0" class="pagination flex-c" background layout="prev, pager, next" :total="result.numOfResults" :page-size="form.limit" :current-page="Number(result.currentPage)" @current-change="changePage">
       </el-pagination> -->
     </div>
@@ -483,10 +487,14 @@ export default {
 @import '@/assets/style/function.scss';
 .course {
   // padding-top: 98px;
-  min-height: calc(100vh - 63px);
-  position: relative;
+  padding: 0;
+  height: calc(100vh - 60px - 63px);
+  position: absolute;
+  top: 60px;
+  bottom: 63px;
   z-index: 2;
-  transition: all 0.4s;
+  // transition: all 0.4s;
+  overflow-y: scroll;
 }
 
 .sidebar {
@@ -529,6 +537,7 @@ export default {
   width: 74%;
   padding: 12px;
   margin: 0;
+  position: relative;
 }
 
 .pagination {

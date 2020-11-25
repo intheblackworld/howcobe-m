@@ -19,10 +19,18 @@
         最新
       </div>
     </div>
-    <div v-if="typeIndex === 0" class="container compare-container" v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="20">
-      <div v-if="result.numOfResults > 0">
-        <LongCard :course="course" v-for="course in result.courses" :key="course.id" :dark="true"></LongCard>
+    <div v-if="typeIndex === 0" class="container compare-container">
+      <div v-infinite-scroll="() => loadMore(result.currentPage, result.pages)" :infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+        <div v-if="result.numOfResults > 0">
+          <LongCard :course="course" v-for="course in result.courses" :key="course.id" :dark="true"></LongCard>
+        </div>
+        <div v-else-if="result.numOfResults === 0" class="flex-c">
+          <div class="non-result-title">
+            找不到你搜尋的課程，請重新搜尋
+          </div>
+        </div>
       </div>
+
       <!-- <div class="content-head flex-ab flex-jb">
         <div class="left flex-ab">
           <div class="head-title">{{pattern === 'compare' ? '比課程' : '課程列表'}}</div>
@@ -61,11 +69,6 @@
           <EmptyLongCard :inRow="true"></EmptyLongCard>
         </div>
       </div> -->
-      <div v-else-if="result.numOfResults === 0" class="flex-c">
-        <div class="non-result-title">
-          找不到你搜尋的課程，請重新搜尋
-        </div>
-      </div>
       <!-- <el-pagination v-if="result.numOfResults > 0" class="pagination flex-c" background layout="prev, pager, next" :total="result.numOfResults" :page-size="form.limit" :current-page="Number(result.currentPage)" @current-change="changePage">
       </el-pagination> -->
     </div>
@@ -81,7 +84,7 @@
     </div>
     <transition name="slide-left">
       <CompareDialog v-if="isDialog" @closeDialog="isDialog=false"></CompareDialog>
-    </transition> 
+    </transition>
   </div>
 </template>
 
@@ -100,11 +103,7 @@ import { mapState } from 'vuex'
 import { category as category_list } from '@/info/category'
 // import Search from '@/components/Search.vue'
 import { info } from '@/info/meta'
-import {
-  getCompareHot,
-  getCompareStack,
-  addCompareStack,
-} from '@/http/api'
+import { getCompareHot, getCompareStack, addCompareStack } from '@/http/api'
 
 export default {
   name: 'course',
@@ -118,7 +117,7 @@ export default {
     // Search,
     LongCard,
     CompareDialog,
-    CompareLongCard
+    CompareLongCard,
     // InfiniteLoading,
   },
 
@@ -310,10 +309,10 @@ export default {
 
   async mounted() {
     await this.getCourse()
-    getCompareHot({}).then(res => {
+    getCompareHot({}).then((res) => {
       this.hot_compares = res
     })
-    getCompareStack({}).then(res => {
+    getCompareStack({}).then((res) => {
       this.new_compares = res
     })
     // window.addEventListener('scroll', this.onScroll, false)
@@ -530,11 +529,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/function.scss';
 .compare {
-  padding-top: 98px;
-  min-height: calc(100vh - 63px);
-  position: relative;
+  padding: 0;
+  height: calc(100vh - 60px - 63px);
+  position: absolute;
+  top: 60px;
+  bottom: 63px;
   z-index: 2;
-  // transition: all 0.4s;
+  overflow-y: scroll;
   background: #2c2b45;
 }
 
