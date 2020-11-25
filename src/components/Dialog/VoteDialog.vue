@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog flex-c">
+  <div class="vote-dialog flex-c">
     <div :class="`vote-form relative flex-as wrap`">
       <!-- <img src="../assets/img/nav-logo-2.png" alt="" class="logo"> -->
       <div class="vote-head relative yellow">
@@ -195,7 +195,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dialog {
+.vote-dialog {
   position: fixed;
   top: 0;
   left: 0;

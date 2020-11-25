@@ -509,7 +509,7 @@ export default {
   padding: 0 15px;
   margin-bottom: 120px;
   > div {
-    padding-bottom: 60px;
+    padding-bottom: 120px;
   }
 }
 
