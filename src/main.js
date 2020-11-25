@@ -17,6 +17,8 @@ import VueScrollTo from 'vue-scrollto'
 import infiniteScroll from 'vue-infinite-scroll'
 import VueLazyComponent from '@xunlei/vue-lazy-component'
 import VueProgressBar from 'vue-progressbar'
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/radar'
 
 import VueMeta from 'vue-meta'
 import VueJsonLD from 'vue-jsonld'
@@ -84,6 +86,8 @@ Vue.use(VueProgressBar, {
   failedColor: 'red',
   height: '10px'
 })
+
+Vue.component('v-chart', ECharts)
 
 export default new Vue({
   router,

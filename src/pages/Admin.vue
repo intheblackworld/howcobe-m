@@ -1,5 +1,8 @@
 <template>
   <div class="admin">
+    <transition name="fade">
+      <AdaptiveDialog v-if="openAdaptiveDialog"></AdaptiveDialog>
+    </transition>
     <el-dialog title="修改個人資料" width="90%" :visible.sync="isEditDialog">
       <el-form :model="form" :rules="editUserInfoRules" ref="editForm">
         <el-form-item label="姓名" prop="name" label-width="120px">
@@ -58,6 +61,7 @@
           <font-awesome :icon="['fa', 'pen-alt']" class="icon" @click="isEditDialog = true" />
         </div>
         <div class="desc">姓名：{{name}}</div>
+        <div class="logout" @click="$store.commit('openAdaptiveDialog')">適性測驗</div>
         <div class="logout" @click="logout">登出</div>
       </div>
     </div>
@@ -128,6 +132,7 @@ import SwipeCards from '@/components/SwipeAdminCards.vue'
 import CompareLongCard from '@/components/CompareLongAdminCard'
 import VoteLongCard from '@/components/VoteLongAdminCard'
 import VoteOrganCard from '@/components/VoteOrganAdminCard'
+import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
 import {
   getBuyCourse,
   // getCollectCompare,
@@ -146,6 +151,7 @@ export default {
     CompareLongCard,
     VoteLongCard,
     VoteOrganCard,
+    AdaptiveDialog,
   },
 
   data() {
@@ -256,6 +262,7 @@ export default {
       'draw_status',
       'interests',
     ]),
+    ...mapState(['openAdaptiveDialog']),
     ...mapState('course', ['collect_list', 'collect_compare']),
 
     collect_courses() {
@@ -488,7 +495,7 @@ export default {
 
 .detail-thumb {
   width: 100vw;
-  min-height: 160px;
+  min-height: 200px;
   position: relative;
   margin-top: 0px;
   opacity: 0;
@@ -555,6 +562,7 @@ export default {
   padding: 5px;
   cursor: pointer;
   color: #fff;
+  margin-bottom: 15px;
 }
 
 .non-result-title {

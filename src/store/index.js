@@ -83,7 +83,7 @@ export default new Vuex.Store({
 
     updateSearch(state, val) {
       state.search = val
-    }
+    },
   },
   actions: {
   },

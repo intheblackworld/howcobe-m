@@ -83,6 +83,8 @@ export const voteCompare = (data) => post('/vote-vcc', data)
 // 適性分析
 export const getAdaptiveQuestion = () => get('adaptive-question', {})
 export const resAdaptiveQuestion = (form) => post('adaptive-analysis', form)
+export const saveAdaptive = (data) => post('/user-adaptive', data)
+export const getAdaptive = () => get('/user-adaptive', {})
 
 // 申請提領
 export const withdraw = () => post('/user/withdraw')
