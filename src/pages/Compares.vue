@@ -577,12 +577,12 @@ export default {
 .compare-container {
   width: 74%;
   padding: 40px 0;
-  padding: 40px 12px;
+  padding: 40px 12px 120px;
   margin: 0;
 
   &.full {
     width: 100%;
-    padding: 40px 0;
+    padding: 40px 0 120px;
   }
 }
 

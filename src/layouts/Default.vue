@@ -1,6 +1,12 @@
 <template>
   <div class="default">
     <Header />
+    <transition name="fade">
+    <LoginDialog v-if="openLoginDialog || (isLogin && !hasInterest)" />
+    </transition>
+    <transition name="fade">
+      <AdaptiveDialog v-if="openAdaptiveDialog"></AdaptiveDialog>
+    </transition>
     <router-view></router-view>
     <Navigator />
     <!-- <transition name="fade">
@@ -13,25 +19,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Header from '@/components/Header.vue'
 import Navigator from '@/components/Navigator.vue'
-// import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
+import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
+import LoginDialog from '@/components/Dialog/LoginDialog'
 
 export default {
   name: 'default_layout',
   components: {
     Header,
     Navigator,
-    // AdaptiveDialog,
+    AdaptiveDialog,
+    LoginDialog
   },
 
   computed: {
-    ...mapState(['isCompare', 'pattern', 'openAdaptiveDialog']),
+    ...mapState(['isCompare', 'pattern', 'openAdaptiveDialog', 'openLoginDialog']),
+    ...mapGetters('user', ['isLogin', 'hasInterest']),
   },
 
-  methods: {
-  }
+  methods: {},
 }
 </script>
 
