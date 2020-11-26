@@ -2,6 +2,8 @@ import Vue from 'vue'
 import {
   Button, Dialog,
   Radio,
+  RadioGroup,
+  RadioButton,
   Select,
   Input,
   Option,
@@ -32,6 +34,8 @@ Vue.prototype.$message = Message
 Vue.use(Pagination)
 Vue.use(Button)
 Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
 Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Input)

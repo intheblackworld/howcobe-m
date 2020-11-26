@@ -887,7 +887,7 @@ export default {
       return this.detail_context.votenumber.reduce((a, b) => a + b, 0)
     },
     current() {
-      return this.currents[this.course_index]
+      return this.currents[this.course_index] || {}
     },
   },
 

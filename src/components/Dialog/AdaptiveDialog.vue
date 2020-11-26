@@ -9,7 +9,9 @@
       <div class="title">{{description}}</div>
       <div class="question" v-for="(q, index) in question" :key="q.title">
         <div class="q-title">{{`${index + 1}. ${q.content}`}}</div>
-        <el-radio v-for="option in q.option" :key="option.content" v-model="form.answer[index]" :label="option.code">{{option.content}}</el-radio>
+        <el-radio-group v-model="form.answer[index]">
+          <el-radio-button v-for="option in q.option" :key="option.content" :label="option.code">{{option.content}}</el-radio-button>
+        </el-radio-group>
       </div>
       <div class="submit-btn flex-c" @click="submitAdaptive">開始分析</div>
       <!-- <div class="bottom flex-c">
@@ -27,7 +29,7 @@
         </div>
       </div>
       <div class="result-title">
-        屬性分數
+        偏好分佈
       </div>
       <div class="cate-list">
         <v-chart :options="radarOption" class="chart" />
@@ -289,6 +291,28 @@ export default {
   background-color: rgb(56, 71, 94, 0.9);
   z-index: 1000;
   // background-color: #999;
+
+  &::v-deep {
+    .el-radio-button__inner {
+      background: transparent;
+      color: #fff;
+    }
+
+    .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+      background-color: #428d9b;
+      border-color: #428d9b;
+      color: #fff;
+      box-shadow: none;
+    }
+    .el-radio-button__inner:hover {
+      color: #333;
+      background: #fff;
+    }
+
+    .el-radio-button__orig-radio:checked:hover+.el-radio-button__inner {
+      color: #fff;
+    }
+  }
 }
 
 .chart {
@@ -511,7 +535,7 @@ export default {
 .submit-btn {
   width: 160px;
   height: 35px;
-  background-color: #4db8cc;
+  background-color: #cca04d;
   color: #fff;
   border-radius: 5px;
   margin: 20px auto;

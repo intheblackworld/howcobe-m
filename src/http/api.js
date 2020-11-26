@@ -96,3 +96,9 @@ export const getHotKeyword = () => get('/search-keyword-hot')
 export const getWithdrawList = ({ account, password }) => get(`/admin/withdraw?account=${account}&password=${password}`)
 
 export const checkWithdraw = ({ account, password, userId }) => post(`/admin/withdraw/over?account=${account}&password=${password}`, { userId })
+
+
+// 收藏等數據
+export const getUserStatic = () => get('/user/statistics')
+
+

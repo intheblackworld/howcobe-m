@@ -1,7 +1,7 @@
 <template>
   <div :class="`compare-long ${dark ? 'dark-card' : ''}`">
     <div class="compare-card flex-ac flex-jb" v-if="compare.courses.length > 0">
-      <div class="content flex-ac flex-jb wrap">
+      <div class="content flex-at flex-jb wrap">
         <div class="course" v-for="course in compare.courses.slice(0, 4)" :key="course.id">
           <div class="compare-img flex-ac flex-jr relative">
             <img :src="course.cover_image" alt="">
