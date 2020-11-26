@@ -74,9 +74,11 @@
     </div>
     <div v-if="typeIndex === 1" class="container compare-container full">
       <CompareLongCard :dark="true" v-for="compare in hot_compares" :key="compare.compare_course_id" :compare="compare" />
+      <div style="height: 100px;"></div>
     </div>
     <div v-if="typeIndex === 2" class="container compare-container full">
       <CompareLongCard :dark="true" v-for="compare in new_compares" :key="compare.compare_course_id" :compare="compare" />
+      <div style="height: 100px;"></div>
     </div>
     <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
       查看比課
@@ -582,7 +584,7 @@ export default {
 
   &.full {
     width: 100%;
-    padding: 40px 0 120px;
+    padding: 40px 0 180px;
   }
 }
 

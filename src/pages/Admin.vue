@@ -455,7 +455,7 @@ export default {
   background-color: #eee;
   height: 100vh;
   overflow-y: scroll;
-  padding-bottom: 63px;
+  padding-bottom: 163px;
   // padding-top: 80px;
 }
 
