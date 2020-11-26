@@ -419,7 +419,7 @@ export default {
 
 .tab-item {
   display: inline-block;
-  min-width: 80px;
+  // min-width: 80px;
   margin-right: 20px;
   font-size: size-m(16);
   line-height: 100%;
@@ -577,6 +577,7 @@ export default {
 }
 
 .non-result-title {
+  width: 100vw;
   font-size: 20px;
   color: #888;
   margin-top: 100px;
