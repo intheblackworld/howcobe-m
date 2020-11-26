@@ -19,6 +19,10 @@
       </div> -->
     </div>
     <div :class="`adaptive-form relative flex-as wrap`" v-if="status === 2" key="status2">
+      <div class="close" @click="closeAdaptiveDialog">
+        <font-awesome :icon="['fa', 'slash']" />
+        <font-awesome :icon="['fa', 'slash']" />
+      </div>
       <div class="title">分析報告</div>
       <div class="result-title">
         推薦課程類型
@@ -48,7 +52,7 @@
 
       <div class="reset-btn flex-c" @click="reTest">重新測驗</div>
       <div class="submit-btn flex-c" @click="save">儲存報告</div>
-
+      <div style="height: 140px;"></div>
     </div>
   </div>
 </template>
