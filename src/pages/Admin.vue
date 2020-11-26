@@ -453,7 +453,9 @@ export default {
 @import '@/assets/style/function.scss';
 .admin {
   background-color: #eee;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
+  padding-bottom: 63px;
   // padding-top: 80px;
 }
 
