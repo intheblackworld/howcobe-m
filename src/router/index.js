@@ -109,8 +109,16 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (isPC) {
-    window.location.href = window.location.href.replace('m.howcobe.com', 'howcobe.com')
+    let url = window.location.href
+    if (url.includes('/detail/course?id=')) {
+      url = url.replace('/detail/course?id=', '/detail?id=')
+    }
+    if (url.includes('/detail/vote?id=')) {
+      url = url.replace('/detail/vote?id=', '/vote_detail?id=')
+    }
+    window.location.href = url.replace('m.howcobe.com', 'howcobe.com')
   }
+
   const { token, refresh_token } = to.query
   if (!to.matched.length) {
     window.location = '/404'

@@ -3,7 +3,9 @@
     <div class="detail-thumb relative" v-if="!is_fix_thumb">
       <!-- <img :src="current.cover_image" class="thumb-img"> -->
       <div class="darken-bg purple-bg frost"></div>
-      <div class="back-btn" @click="$router.go(-1)">
+      <div class="back-btn" @click="hasHistory() 
+    ? $router.go(-1) 
+    : $router.push('/')">
         <font-awesome :icon="['fa', 'chevron-left']" />
       </div>
       <div class="thumb-title relative">
@@ -892,6 +894,9 @@ export default {
   },
 
   methods: {
+    hasHistory() {
+      return window.history.length > 2
+    },
     goCourse() {
       get('/ichannel/url', {
         platform: this.$route.query.platform,
