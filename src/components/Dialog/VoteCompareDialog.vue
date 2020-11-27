@@ -7,8 +7,7 @@
           <font-awesome :icon="['fa', 'chevron-left']" />
         </div>
         <div class="dialog-head flex-ac flex-jb">
-          <div class="head-title">課程比拼</div>
-          <div class="yellow round-big middle btn flex-c" @click="showVoteDialog" v-show="compare_list.length >= 2">發起投票</div>
+          <div class="head-title">課程詳情</div>
           <div class="flex-ac flex-jb">
             <!-- TODO 發起投票流程 -->
             <!-- 1. search-compare-course 存入比較課程的搜尋紀錄 使用這隻API 回傳的 id -->
@@ -27,10 +26,9 @@
             <!-- <div class="share-btn" @click="share(current)">
               <font-awesome :icon="['fa', 'external-link-alt']" />
             </div> -->
-            <div class="collect-btn" @click="addCompareToCollect" v-show="compare_list.length >= 2">
-              <!-- 空心 -->
+            <!-- <div class="collect-btn" @click="addCompareToCollect" v-show="compare_list.length >= 2">
               <font-awesome :icon="['far', 'heart']" />
-            </div>
+            </div> -->
 
           </div>
           <!-- <div class="flex-ac flex-jb">
@@ -122,7 +120,7 @@
       </div>
     </div> -->
     <div>
-      <Compare :type="type" @closeDialog="$emit('closeDialog')" />
+      <VoteCompare :voteList="voteList" :type="type" @closeDialog="$emit('closeDialog')" />
     </div>
     <!-- <div class="flex-c">
       <div
@@ -136,23 +134,23 @@
       @click="toggleType"
       v-show="compare_list.length >= 2"
     >{{type === 0 ? '章節比較' : '課程簡介'}}</div> -->
-    <VoteDialog v-if="isVoteDialog" @closeDialog="isVoteDialog = false" />
+    <!-- <VoteDialog v-if="isVoteDialog" @closeDialog="isVoteDialog = false" /> -->
   </div>
 
 </template>
 
 <script>
-import Compare from '@/components/Compare.vue'
-import { mapState } from 'vuex'
+import VoteCompare from '@/components/VoteCompare.vue'
+// import { mapState } from 'vuex'
 import { addCollectCompare } from '@/http/api'
-import VoteDialog from '@/components/Dialog/VoteDialog.vue'
+// import VoteDialog from '@/components/Dialog/VoteDialog.vue'
 
 export default {
   data() {
     return {
       searchVal: '',
       type: 0,
-      isVoteDialog: false,
+      // isVoteDialog: false,
       tabList: [
         {
           name: '重點整理',
@@ -174,22 +172,14 @@ export default {
   },
 
   components: {
-    Compare,
-    VoteDialog,
+    VoteCompare,
+    // VoteDialog,
   },
 
+  props: ['voteList'],
+
   computed: {
-    searchResult() {
-      if (!this.searchVal) {
-        return []
-      } else {
-        return this.searchReg(
-          this.$store.state.course.quick_list,
-          this.searchVal,
-        )
-      }
-    },
-    ...mapState('course', ['compare_list', 'compare_course_id']),
+    // ...mapState('course', ['compare_list', 'compare_course_id']),
   },
 
   watch: {

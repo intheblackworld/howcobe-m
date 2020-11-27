@@ -1,5 +1,8 @@
 <template>
   <div class="detail">
+    <transition name="slide-left">
+      <VoteCompareDialog v-if="isDialog" @closeDialog="isDialog=false" :voteList="detail_context.courses"></VoteCompareDialog>
+    </transition>
     <div class="detail-thumb relative" v-if="!is_fix_thumb">
       <!-- <img :src="current.cover_image" class="thumb-img"> -->
       <div class="darken-bg purple-bg frost"></div>
@@ -45,7 +48,7 @@
             </div>
             <div class="rank-right flex-ac wrap flex-jr">
               <div class="yellow round-big big btn flex-c" @click="vote(course, index)">投他一票</div>
-              <!-- <div class="blue round-big big btn flex-c" v-scroll-to="{element: '#content-start', offset: -100}">詳細課程</div> -->
+              <div class="blue round-big big btn flex-c" @click="goCompare">詳細比較</div>
             </div>
           </div>
         </div>
@@ -743,12 +746,14 @@ import moment from 'moment'
 // import EmptyCard from '@/components/EmptyCard'
 import { transCategory } from '@/info/category'
 import { isMobile } from '@/util/device'
+import VoteCompareDialog from '@/components/Dialog/VoteCompareDialog.vue'
 
 export default {
   name: 'voteDetail',
   data() {
     return {
       isMobile,
+      isDialog: false,
       isShowBtn: false,
       activeChapter: [0],
       interest_list: [],
@@ -758,6 +763,7 @@ export default {
     }
   },
   components: {
+    VoteCompareDialog,
     // SwipeCards,
     // EmptyContent,
     // ShareLinks,
@@ -874,7 +880,7 @@ export default {
     //   }
     // },
 
-    $route: function() {
+    $route: function () {
       this.$store.dispatch('vote/getVoteDetail', {
         id: this.$route.query.id,
       })
@@ -894,6 +900,19 @@ export default {
   },
 
   methods: {
+    goCompare() {
+      // addCompareStack({
+      //   course_ids: this.compare_list.map((item) => item.id),
+      // }).then((res) => {
+      //   this.$store.commit('course/setCompareId', res.documents.id)
+      // })
+      // this.$store.commit('setCompare', true)
+      this.isDialog = true
+    },
+    // addCompare(course) {
+    //   this.$store.commit('setPattern', 'compare')
+    //   this.$store.dispatch('course/addCompareCourse', course)
+    // },
     hasHistory() {
       return window.history.length > 2
     },
@@ -901,7 +920,7 @@ export default {
       get('/ichannel/url', {
         platform: this.$route.query.platform,
         platform_course_id: this.current.platform_course_id,
-      }).then(res => {
+      }).then((res) => {
         window.open(res.url)
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
       })
@@ -943,7 +962,7 @@ export default {
               你將會學到
             </div>
             ${this.current.learn
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>
           <div class="block">
@@ -951,7 +970,7 @@ export default {
               適合對象
             </div>
             ${this.current.object
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>
           <div class="block">
@@ -959,7 +978,7 @@ export default {
               建議背景
             </div>
             ${this.current.knowledge
-              .map(text => `<pre class="block-desc">${text}</pre>`)
+              .map((text) => `<pre class="block-desc">${text}</pre>`)
               .join('')}
           </div>`
           break
@@ -1077,7 +1096,7 @@ export default {
 
     countBarWidth(votes) {
       return (votes / this.totalVote) * 98 + 2
-    }
+    },
   },
 
   destroyed() {
