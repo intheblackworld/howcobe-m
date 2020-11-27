@@ -59,7 +59,8 @@
     <div class="footer flex-c">
       <a target="_blank" href="https://m.me/howcobe">
         聯絡我們
-      </a>
+      </a><br />
+      <div>Copyright 2020 Howcobe</div>
     </div>
     <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
       查看比課
@@ -193,9 +194,17 @@
   background-color:#1a192e;
 
   a {
+    text-align: center;
     color: #fff;
     font-size: 16px;
     text-decoration: none;
+    margin-right: 15px;
+  }
+
+  div {
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
   }
 }
 </style>
