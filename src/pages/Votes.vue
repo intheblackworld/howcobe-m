@@ -43,7 +43,7 @@ import { mapState, mapGetters } from 'vuex'
 // import EmptyLongCard from '@/components/EmptyLongCard'
 import { vote_category as category_list } from '@/info/category'
 // import Search from '@/components/Search.vue'
-import { info } from '@/info/meta'
+// import { info } from '@/info/meta'
 import _ from 'lodash'
 
 export default {
@@ -60,47 +60,47 @@ export default {
     // InfiniteLoading,
   },
 
-  metaInfo() {
-    return {
-      title: `好課比 - ${this.pageTitle}`,
-      meta: [
-        {
-          property: 'title',
-          content: `好課比 - ${this.pageTitle}`,
-          vmid: 'title',
-        },
-        {
-          property: 'og:title',
-          content: `好課比 - ${this.pageTitle}`,
-          vmid: 'og:title',
-        },
-        {
-          property: 'description',
-          content: info.description,
-          vmid: 'description',
-        },
-        {
-          property: 'og:description',
-          content: info.description,
-          vmid: 'og:title',
-        },
-        {
-          property: 'keywords',
-          content: info.keywords,
-          vmid: 'keywords',
-        },
-        {
-          property: 'og:url',
-          content: window.location.href,
-          vmid: 'og:url',
-        },
-        {
-          property: 'og:image',
-          content: 'https://howcobe.com/img.png',
-        },
-      ],
-    }
-  },
+  // metaInfo() {
+  //   return {
+  //     title: `好課比 - ${this.pageTitle}`,
+  //     meta: [
+  //       {
+  //         property: 'title',
+  //         content: `好課比 - ${this.pageTitle}`,
+  //         vmid: 'title',
+  //       },
+  //       {
+  //         property: 'og:title',
+  //         content: `好課比 - ${this.pageTitle}`,
+  //         vmid: 'og:title',
+  //       },
+  //       {
+  //         property: 'description',
+  //         content: info.description,
+  //         vmid: 'description',
+  //       },
+  //       {
+  //         property: 'og:description',
+  //         content: info.description,
+  //         vmid: 'og:title',
+  //       },
+  //       {
+  //         property: 'keywords',
+  //         content: info.keywords,
+  //         vmid: 'keywords',
+  //       },
+  //       {
+  //         property: 'og:url',
+  //         content: window.location.href,
+  //         vmid: 'og:url',
+  //       },
+  //       {
+  //         property: 'og:image',
+  //         content: 'https://howcobe.com/img.png',
+  //       },
+  //     ],
+  //   }
+  // },
 
   // jsonld() {
   //   return this.result.votes.map((course, index) => ({

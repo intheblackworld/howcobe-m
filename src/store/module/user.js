@@ -7,7 +7,7 @@ export default {
     register: [],
     token: '',
     refresh_token: '',
-    interests: [''],
+    interests: [],
 
     name: '',
     email: '',

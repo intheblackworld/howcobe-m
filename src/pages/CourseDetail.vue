@@ -756,47 +756,47 @@ export default {
     })
   },
 
-  metaInfo() {
-    return {
-      title: `好課比 - ${this.current.platform} - ${this.current.title}`,
-      meta: [
-        {
-          property: 'title',
-          content: `好課比 - ${this.current.platform} - ${this.current.title}`,
-          vmid: 'title',
-        },
-        {
-          property: 'og:title',
-          content: this.current.title,
-          vmid: 'og:title',
-        },
-        {
-          property: 'description',
-          content: this.current.description,
-          vmid: 'description',
-        },
-        {
-          property: 'og:description',
-          content: this.current.description,
-          vmid: 'og:title',
-        },
-        {
-          property: 'keywords',
-          content: this.current.keywords,
-          vmid: 'keywords',
-        },
-        {
-          property: 'og:url',
-          content: `https://howcobe.com/detail?id=${this.$route.query.id}`,
-          vmid: 'og:url',
-        },
-        {
-          property: 'og:image',
-          content: this.current.cover_image,
-        },
-      ],
-    }
-  },
+  // metaInfo() {
+  //   return {
+  //     title: `好課比 - ${this.current.platform} - ${this.current.title}`,
+  //     meta: [
+  //       {
+  //         property: 'title',
+  //         content: `好課比 - ${this.current.platform} - ${this.current.title}`,
+  //         vmid: 'title',
+  //       },
+  //       {
+  //         property: 'og:title',
+  //         content: this.current.title,
+  //         vmid: 'og:title',
+  //       },
+  //       {
+  //         property: 'description',
+  //         content: this.current.description,
+  //         vmid: 'description',
+  //       },
+  //       {
+  //         property: 'og:description',
+  //         content: this.current.description,
+  //         vmid: 'og:title',
+  //       },
+  //       {
+  //         property: 'keywords',
+  //         content: this.current.keywords,
+  //         vmid: 'keywords',
+  //       },
+  //       {
+  //         property: 'og:url',
+  //         content: `https://howcobe.com/detail?id=${this.$route.query.id}`,
+  //         vmid: 'og:url',
+  //       },
+  //       {
+  //         property: 'og:image',
+  //         content: this.current.cover_image,
+  //       },
+  //     ],
+  //   }
+  // },
 
   jsonld() {
     return [
