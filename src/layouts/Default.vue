@@ -40,6 +40,17 @@ export default {
   },
 
   methods: {},
+
+  async mounted() {
+    this.$store.dispatch('course/getQuickCourse')
+    if (this.isLogin) {
+      await this.$store.dispatch('user/getUserInfo')
+      if (this.hasInterest) {
+        await this.$store.dispatch('course/getInterestsCourse')
+      }
+      await this.$store.dispatch('course/getCollectList')
+    }
+  },
 }
 </script>
 
