@@ -7,7 +7,7 @@ export default {
     register: [],
     token: '',
     refresh_token: '',
-    interests: [],
+    interests: null,
 
     name: '',
     email: '',
@@ -17,7 +17,7 @@ export default {
   getters: {
     userRole: (state, getters, { user }) => user.role || {},
     isLogin: (state) => !!state.token,
-    hasInterest: (state) => state.interests.length > 0
+    hasInterest: (state) => state.interests ? state.interests.length > 0 : true
   },
   actions: {
 

@@ -63,7 +63,6 @@
         <div class="desc">姓名：{{name}}</div>
         <div class="logout" @click="$store.commit('openAdaptiveDialog')">適性測驗</div>
         <div class="logout" @click="logout">登出</div>
-        <div class="logout">聯絡我們</div>
       </div>
     </div>
     <div class="item-container flex wrap">
