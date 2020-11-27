@@ -534,7 +534,7 @@ export default {
   background: #fff;
   // border-radius: 16px;
   width: 100%;
-  margin: -30px auto 0;
+  margin: 0px auto 0;
   position: relative;
   z-index: 3;
   padding: 15px;
