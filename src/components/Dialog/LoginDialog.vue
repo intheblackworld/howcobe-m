@@ -177,8 +177,8 @@ export default {
 }
 
 .login-form {
-  width: 375px;
-  height: 667px;
+  width: 100vw;
+  height: 100vh;
   padding: 20px 30px;
   background-color: #222431;
   border-radius: 5px;
