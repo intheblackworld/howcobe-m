@@ -1,3 +1,3 @@
 export default {
-  gtmCode: ['PBSJL74'], // 可放置多個
+  gtmCode: ['WPNCC9S'], // 可放置多個
 }
