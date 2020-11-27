@@ -85,7 +85,7 @@ export default {
     return {
       // category_list: category_list.slice(1, category_list.length),
       // selected_interests: [],
-      category_list,
+      category_list: category_list.slice(1, category_list.length),
       form: {
         category: '',
         title: '',

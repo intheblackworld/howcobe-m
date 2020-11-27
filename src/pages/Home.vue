@@ -48,8 +48,19 @@
       <CourseCard v-for="course in fivestar_courses" :key="course.id" :course="course" />
     </div>
     <BlockHead :title="special_title_1" :link="{name: '', to: ''}" />
+    <SwipeCards :courses="special_list_1.slice(0, 4)" />
+    
     <BlockHead :title="special_title_2" :link="{name: '', to: ''}" />
-    <BlockHead :title="special_title_3" :link="{name: '', to: ''}" />
+    <SwipeCards :courses="special_list_2.slice(0, 4)" />
+    
+    <BlockHead :title="special_title_2" :link="{name: '', to: ''}" />
+    <SwipeCards :courses="special_list_3.slice(0, 4)" />
+    
+    <div class="footer flex-c">
+      <a target="_blank" href="https://m.me/howcobe">
+        聯絡我們
+      </a>
+    </div>
     <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
       查看比課
       <div class="menu-dot" v-show="compareCount">{{compareCount}}</div>
@@ -175,6 +186,18 @@
     margin-top: -5px;
   }
 }
+
+.footer {
+  width: 100vw;
+  height: 36px;
+  background-color:#1a192e;
+
+  a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+  }
+}
 </style>
 
 <script>
@@ -221,7 +244,7 @@ export default {
       platform_courses: [],
       fivestar_courses: [],
       plaform_courses: [],
-      
+
       special_list_1: [],
       special_list_2: [],
       special_list_3: [],
@@ -287,7 +310,7 @@ export default {
       this.new_compares = res
     })
 
-    getSpecialCourse({}).then(res => {
+    getSpecialCourse({}).then((res) => {
       this.special_list_1 = res.courses[0]
       this.special_list_2 = res.courses[1]
       this.special_list_3 = res.courses[2]
