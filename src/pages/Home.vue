@@ -47,6 +47,9 @@
     <div class="flex scroll-x">
       <CourseCard v-for="course in fivestar_courses" :key="course.id" :course="course" />
     </div>
+    <BlockHead :title="special_title_1" :link="{name: '', to: ''}" />
+    <BlockHead :title="special_title_2" :link="{name: '', to: ''}" />
+    <BlockHead :title="special_title_3" :link="{name: '', to: ''}" />
     <div class="cart-btn yellow round-big big btn flex-c relative" v-if="compareCount > 0 || compareCount === 'M'" @click="goCompare">
       查看比課
       <div class="menu-dot" v-show="compareCount">{{compareCount}}</div>
@@ -193,6 +196,7 @@ import {
   getCompareStack,
   getPlatformCourse,
   addCompareStack,
+  getSpecialCourse,
 } from '@/http/api'
 import CompareDialog from '@/components/Dialog/CompareDialog.vue'
 export default {
@@ -217,6 +221,13 @@ export default {
       platform_courses: [],
       fivestar_courses: [],
       plaform_courses: [],
+      
+      special_list_1: [],
+      special_list_2: [],
+      special_list_3: [],
+      special_title_1: '',
+      special_title_2: '',
+      special_title_3: '',
 
       isDialog: false,
     }
@@ -274,6 +285,15 @@ export default {
     })
     getCompareStack({}).then((res) => {
       this.new_compares = res
+    })
+
+    getSpecialCourse({}).then(res => {
+      this.special_list_1 = res.courses[0]
+      this.special_list_2 = res.courses[1]
+      this.special_list_3 = res.courses[2]
+      this.special_title_1 = res.specialTags[0]
+      this.special_title_2 = res.specialTags[1]
+      this.special_title_3 = res.specialTags[2]
     })
   },
 }

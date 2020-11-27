@@ -16,6 +16,8 @@ export const getInterestsCourse = ({ limit = 8, page = 1, category }) => {
 
 export const getPlatformCourse = () => get('/courses-crossplatform', {})
 
+export const getSpecialCourse = () => get('/special-tag', {})
+
 // 快速搜尋用的搜尋列表
 export const getQuickCourse = () => get('/courses-list', {})
 
@@ -81,7 +83,7 @@ export const voteCompare = (data) => post('/vote-vcc', data)
 // }
 
 // 適性分析
-export const getAdaptiveQuestion = () => get('adaptive-question', {})
+export const getAdaptiveQuestion = () => get('/adaptive-question', {})
 export const resAdaptiveQuestion = (form) => post('adaptive-analysis', form)
 export const saveAdaptive = (data) => post('/user-adaptive', data)
 export const getAdaptive = () => get('/user-adaptive', {})

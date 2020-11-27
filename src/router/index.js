@@ -94,7 +94,13 @@ const routes = [
         ]
       },
     ],
-  }
+  },
+  {
+    path: '404',
+    name: '404',
+    meta: { transName: 'fade', page: '404' }, // slide, fade
+    component: () => import(/* webpackChunkName: "404" */ '@/pages/404.vue'),
+  },
 ]
 
 const router = new VueRouter({

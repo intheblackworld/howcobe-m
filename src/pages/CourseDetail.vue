@@ -56,14 +56,20 @@
             <div class="block-title">
               課程評價
             </div>
-            <div class="block-desc">
-              <div class="card-star flex-ac">
-                <el-rate v-model="current.avg_rating" disabled show-score text-color="#ff9900" score-template="">
-                </el-rate>
-                <div class="card-rating">
-                  ({{current.consumers === -1 ? '???' : (current.consumers === 0 ? '暫無評價' : current.consumers)}})
-                </div>
+            <div class="card-star flex-ac">
+              <el-rate v-model="current.avg_rating" disabled show-score text-color="#ff9900" score-template="">
+              </el-rate>
+              <div class="card-rating">
+                ({{current.avg_rating === -1 ? '???' : (current.avg_rating === 0 ? '暫無評價' : current.avg_rating)}})
               </div>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-title">
+              已購人數
+            </div>
+            <div class="block-desc">
+              {{current.consumers}}人
             </div>
           </div>
           <div class="block">

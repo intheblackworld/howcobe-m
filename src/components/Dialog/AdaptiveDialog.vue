@@ -1,6 +1,6 @@
 <template>
   <div class="dialog flex-c">
-    <div :class="`adaptive-form relative flex-as wrap`" v-if="status !== 2" key="status01">
+    <div :class="`adaptive-form relative flex-as wrap`" v-if="status !== 2 && status !== 3" key="status01">
       <img src="../../assets/img/nav-logo-2.png" alt="" class="logo">
       <div class="close" @click="closeAdaptiveDialog">
         <font-awesome :icon="['fa', 'slash']" />
@@ -18,7 +18,7 @@
         <a href="">隱私權條款</a>
       </div> -->
     </div>
-    <div :class="`adaptive-form relative flex-as wrap`" v-if="status === 2" key="status2">
+    <div :class="`adaptive-form relative flex-as wrap`" v-if="status === 2 || status === 3" key="status2">
       <div class="close" @click="closeAdaptiveDialog">
         <font-awesome :icon="['fa', 'slash']" />
         <font-awesome :icon="['fa', 'slash']" />
@@ -51,7 +51,7 @@
       </div>
 
       <div class="reset-btn flex-c" @click="reTest">重新測驗</div>
-      <div class="submit-btn flex-c" @click="save">儲存報告</div>
+      <div v-if="status === 2" class="submit-btn flex-c" @click="save">儲存報告</div>
       <div style="height: 140px;"></div>
     </div>
   </div>
@@ -241,7 +241,7 @@ export default {
             (c) => Object.values(c)[0],
           ),
         ]
-        this.status = 2
+        this.status = 3
         this.categories = res.userAdaptiveRecord.categories
         await Promise.all(
           this.categories.map(async (category) => {
@@ -389,14 +389,15 @@ export default {
 }
 
 .adaptive-form {
-  // width: 640px;
-  // height: 667px;
+  width: 100vw;
+  height: 100vh;
   padding: 20px 20px;
   background-color: #222431;
   border-radius: 5px;
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.3);
   overflow-y: scroll;
   transition: all 0.3s;
+  padding-bottom: 200px;
 
   &.short {
     height: 500px;
@@ -565,7 +566,7 @@ export default {
   }
   .adaptive-form {
     height: 100vh;
-    display: flex;
+    // display: flex;
     // align-items: center !important;
     // align-content: center;
 

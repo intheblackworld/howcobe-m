@@ -132,9 +132,9 @@ axios.interceptors.response.use(
         //   break
         // 404请求不存在
         case 404:
-          router.replace({
-            path: '/404',
-          })
+          // router.replace({
+          //   path: '/404',
+          // })
           break
         // 其他错误，直接抛出错误提示
         default:
