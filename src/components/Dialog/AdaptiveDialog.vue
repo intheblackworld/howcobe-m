@@ -188,12 +188,14 @@ export default {
     submitAdaptive() {
       this.status = 1
       resAdaptiveQuestion(this.form).then((res) => {
+        this.result = res
         this.categories = res.categories
         this.interest_list = res.recommend_classes
         this.status = 2
         this.radarOption.series[0].data = [
           this.result.categoryTendencyList.map((c) => Object.values(c)[0]),
         ]
+
       })
     },
 
