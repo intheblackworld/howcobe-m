@@ -53,7 +53,7 @@
     <BlockHead :title="special_title_2" :link="{name: '', to: ''}" />
     <SwipeCards :courses="special_list_2.slice(0, 4)" />
     
-    <BlockHead :title="special_title_2" :link="{name: '', to: ''}" />
+    <BlockHead :title="special_title_3" :link="{name: '', to: ''}" />
     <SwipeCards :courses="special_list_3.slice(0, 4)" />
     
     <div class="footer flex-c">
