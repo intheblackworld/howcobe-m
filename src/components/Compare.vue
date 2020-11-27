@@ -37,7 +37,7 @@
             <img :src="require(`@/assets/img/${item.platform}.png`)" alt="" class="row-platfom">
           </div>
           <div class="compare-row">
-            <div class="row-desc">{{item.title}}</div>
+            <div class="row-desc">{{item.title.slice(0, 15)}}</div>
           </div>
           <div class="compare-row">
             <div class="row-desc">
