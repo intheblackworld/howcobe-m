@@ -15,6 +15,7 @@
           <Card :inRow="false" :item="item" />
         </div> -->
           <LongCard :inRow="false" :vote="vote" v-for="vote in result.votes" :key="vote.id" v-show="vote.status === 'online'"></LongCard>
+          <div style="height: 100px;"></div>
         </div>
         <div v-else-if="result.numOfResults === 0" class="flex-c">
           <div class="non-result-title">
