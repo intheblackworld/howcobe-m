@@ -442,9 +442,9 @@ export default {
       //     break
       // }
 
-      if (this.search) {
-        this.form.search = this.search
-      }
+      this.form.search = this.search
+      // if (this.search) {
+      // }
 
       if (this.category) {
         this.form.category = this.category.value

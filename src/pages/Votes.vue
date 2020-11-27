@@ -331,9 +331,9 @@ export default {
       }
       this.form.page = 1
       this.form.limit = 12
-      if (this.search) {
-        this.form.search = this.search
-      }
+      this.form.search = this.search
+      // if (this.search) {
+      // }
 
       if (this.category) {
         this.form.category = this.category
