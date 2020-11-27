@@ -50,6 +50,7 @@
           </div>
         </div>
       </div>
+      <div style="height: 100px;"></div>
     </div>
   </div>
 </template>
@@ -197,7 +198,6 @@
 .detail {
   // background-color: rgb(245, 245, 245);
   // margin-top: 40px;
-  padding: 60px;
   height: calc(100vh);
   // position: absolute;
   // top: 0px;
