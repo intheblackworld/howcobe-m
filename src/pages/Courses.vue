@@ -94,29 +94,29 @@ export default {
   //   }
   // },
 
-  jsonld() {
-    return this.result.courses.map((course, index) => ({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      url: 'https://howcobe.com',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: index + 1,
-          item: {
-            '@type': 'Course',
-            url: `https://howcobe.com/detail?id=${course.id}&platform=${course.platform}`,
-            name: course.title,
-            description: course.description,
-            provider: {
-              '@type': 'Organization',
-              name: course.lecturers[0].name,
-            },
-          },
-        },
-      ],
-    }))
-  },
+  // jsonld() {
+  //   return this.result.courses.map((course, index) => ({
+  //     '@context': 'https://schema.org',
+  //     '@type': 'ItemList',
+  //     url: 'https://howcobe.com',
+  //     itemListElement: [
+  //       {
+  //         '@type': 'ListItem',
+  //         position: index + 1,
+  //         item: {
+  //           '@type': 'Course',
+  //           url: `https://howcobe.com/detail?id=${course.id}&platform=${course.platform}`,
+  //           name: course.title,
+  //           description: course.description,
+  //           provider: {
+  //             '@type': 'Organization',
+  //             name: course.lecturers[0].name,
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   }))
+  // },
   data() {
     return {
       platform_list: [

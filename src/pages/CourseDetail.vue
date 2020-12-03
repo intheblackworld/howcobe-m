@@ -804,52 +804,52 @@ export default {
   //   }
   // },
 
-  jsonld() {
-    return [
-      {
-        '@context': 'http://schema.org',
-        '@type': 'WebSite',
-        name: this.current.title,
-        url: 'https://howcobe.com/',
-        // potentialAction: [
-        //   {
-        //     "@type": "SearchAction",
-        //     target: "https: blog.lalacube.com search article?p={search_term_string}",
-        //     "query-input": "required name=search_term_string"
-        //   }
-        // ]
-      },
-      {
-        '@context': 'http://schema.org',
-        '@type': 'WebApplication',
-        name: this.current.title,
-        description: this.current.description,
-        operatingSystem: 'Windows 7, OSX 10.6',
-        browserRequirements: 'requires HTML5 support',
-        applicationCategory: 'DeveloperApplication',
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: this.current.avg_rating,
-          ratingCount: this.current.consumers,
-        },
-        offers: {
-          '@type': 'Offer',
-          availability: 'https://schema.org/InStock',
-          price: this.current.price,
-          priceCurrency: 'TWD',
-        },
-        // "image": "https://howcobe.com/",
-        url: `https://howcobe.com/detail?id=${this.$route.query.id}`,
-        author: {
-          '@context': 'http://schema.org',
-          '@type': 'Organization',
-          name: this.current.author,
-          // url: 'https://howcobe.com/',
-          // logo: 'https: blog.lalacube.com mei img app privacy i_512x512.png',
-        },
-      },
-    ]
-  },
+  // jsonld() {
+  //   return [
+  //     {
+  //       '@context': 'http://schema.org',
+  //       '@type': 'WebSite',
+  //       name: this.current.title,
+  //       url: 'https://howcobe.com/',
+  //       // potentialAction: [
+  //       //   {
+  //       //     "@type": "SearchAction",
+  //       //     target: "https: blog.lalacube.com search article?p={search_term_string}",
+  //       //     "query-input": "required name=search_term_string"
+  //       //   }
+  //       // ]
+  //     },
+  //     {
+  //       '@context': 'http://schema.org',
+  //       '@type': 'WebApplication',
+  //       name: this.current.title,
+  //       description: this.current.description,
+  //       operatingSystem: 'Windows 7, OSX 10.6',
+  //       browserRequirements: 'requires HTML5 support',
+  //       applicationCategory: 'DeveloperApplication',
+  //       aggregateRating: {
+  //         '@type': 'AggregateRating',
+  //         ratingValue: this.current.avg_rating,
+  //         ratingCount: this.current.consumers,
+  //       },
+  //       offers: {
+  //         '@type': 'Offer',
+  //         availability: 'https://schema.org/InStock',
+  //         price: this.current.price,
+  //         priceCurrency: 'TWD',
+  //       },
+  //       // "image": "https://howcobe.com/",
+  //       url: `https://howcobe.com/detail?id=${this.$route.query.id}`,
+  //       author: {
+  //         '@context': 'http://schema.org',
+  //         '@type': 'Organization',
+  //         name: this.current.author,
+  //         // url: 'https://howcobe.com/',
+  //         // logo: 'https: blog.lalacube.com mei img app privacy i_512x512.png',
+  //       },
+  //     },
+  //   ]
+  // },
 
   mounted() {
     // this.$store.dispatch('course/getCourseDetail', { id: this.$route.query.id })
