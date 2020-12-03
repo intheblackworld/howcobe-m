@@ -19,48 +19,7 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="content-head flex-ab flex-jb">
-        <div class="left flex-ab">
-          <div class="head-title">{{pattern === 'compare' ? '比課程' : '課程列表'}}</div>
-          <div :class="`head-tab ${tabIndex === index ? 'active' : ''}`" v-for="(tab, index) in tab_list" :key="tab.name + index" @click="changeSortValue(index)">
-            {{tab.name}}
-            <div class="bottom-line"></div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div :class="`fix-searchbar flex-ac`">
-        <div class="search-content flex-ac flex-jb">
-          <div class="form">
-            <div class="tab">
-              <div class="tab-list flex-ac flex-jb">
-                <div :class="`tab-item ${pattern == 'search' ? 'active' : ''}`" @click="toSearch">找課程</div>
-                <div :class="`tab-item ${pattern == 'compare' ? 'active' : ''}`" @click="toCompare">比課程</div>
-                <div class="tab-dot" v-show="(compareCount > 0 || compareCount === 'max')">{{compareCount}}</div>
-                <div :class="`bottom-line ${pattern == 'compare' ? 'right' : ''}`"></div>
-              </div>
-            </div>
-            <transition-group name="slide-fade" mode="out-in">
-              <div key="search" class="search">
-                <Search :showHotList="false" />
-              </div>
-            </transition-group>
-          </div>
-          <div class="categorys flex-ac wrap">
-            <div :class="`ghost-red round-big middle btn flex-c ${categoryIndex === index ? 'active' : ''}`" v-for="(category, index) in category_list" :key="category.value" @click="changeCategory(index)">
-              {{category.label}}
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div v-else-if="result.numOfResults === -1" class="flex wrap">
-        <div class="card-wrap" v-for="index in 12" :key="`emptyCard-${index}`">
-          <EmptyLongCard :inRow="true"></EmptyLongCard>
-        </div>
-      </div> -->
-
-      <!-- <el-pagination v-if="result.numOfResults > 0" class="pagination flex-c" background layout="prev, pager, next" :total="result.numOfResults" :page-size="form.limit" :current-page="Number(result.currentPage)" @current-change="changePage">
-      </el-pagination> -->
+      <div style="height: 120px;"></div>
     </div>
   </div>
 </template>
