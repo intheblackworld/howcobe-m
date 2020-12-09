@@ -24,8 +24,8 @@
     <div class="flex">
       <VoteCard v-for="vote in votes.slice(0, 2)" :key="vote.id" :vote="vote" />
     </div>
-    <!-- <BlockHead title="隨機課程" :link="false" />
-    <SwipeCards :courses="platform_courses.slice(0, 4)" /> -->
+    <BlockHead title="隨機課程" :link="false" />
+    <SwipeCards :courses="platform_courses.slice(0, 4)" />
     <BlockHead title="熱門課程" :link="{name: '更多課程', to: '/courses?type=hot'}" />
     <SwipeCards :courses="hot_courses" />
 
