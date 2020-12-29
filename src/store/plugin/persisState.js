@@ -3,6 +3,7 @@ export default {
   paths: [
     'user.token',
     'user.refresh_token',
-    'user.secret_word'
+    'user.secret_word',
+    'user.hasPassNewBie'
   ]
 }

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-// import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import _ from 'lodash'
 import {
   getAdaptiveQuestion,
@@ -177,7 +177,7 @@ export default {
   },
 
   computed: {
-    // ...mapGetters('user', ['isLogin', 'hasInterest']),
+    ...mapGetters('user', ['isLogin', 'hasInterest']),
     // ...mapState('user', ['interests', 'name']),
   },
   methods: {
@@ -192,10 +192,10 @@ export default {
         this.categories = res.categories
         this.interest_list = res.recommend_classes
         this.status = 2
+        this.$store.commit('user/passQuiz')
         this.radarOption.series[0].data = [
           this.result.categoryTendencyList.map((c) => Object.values(c)[0]),
         ]
-
       })
     },
 
@@ -234,37 +234,46 @@ export default {
   },
 
   async mounted() {
-    getAdaptive().then(async (res) => {
-      if (res.userAdaptiveRecord.categoryTendencyList) {
-        this.radarOption.series[0].data = [
-          res.userAdaptiveRecord.categoryTendencyList.map(
-            (c) => Object.values(c)[0],
-          ),
-        ]
-        this.status = 3
-        this.categories = res.userAdaptiveRecord.categories
-        await Promise.all(
-          this.categories.map(async (category) => {
-            searchCourse({
-              limit: 3,
-              page: Math.floor(Math.random() * 3) + 1,
-              sortway: 'DESC',
-              sortvalue: 'avg_rating',
-              category,
-            }).then((res) => {
-              this.interest_list.push(...res.courses)
-            })
-          }),
-        )
-      } else {
-        getAdaptiveQuestion().then((res) => {
-          this.question = res.question
-          this.form.title = res.title
-          this.description = res.description
-        })
-        this.status = 1
-      }
-    })
+    if (this.isLogin) {
+      getAdaptive().then(async (res) => {
+        if (res.userAdaptiveRecord.categoryTendencyList) {
+          this.radarOption.series[0].data = [
+            res.userAdaptiveRecord.categoryTendencyList.map(
+              (c) => Object.values(c)[0],
+            ),
+          ]
+          this.status = 3
+          this.categories = res.userAdaptiveRecord.categories
+          await Promise.all(
+            this.categories.map(async (category) => {
+              searchCourse({
+                limit: 3,
+                page: Math.floor(Math.random() * 3) + 1,
+                sortway: 'DESC',
+                sortvalue: 'avg_rating',
+                category,
+              }).then((res) => {
+                this.interest_list.push(...res.courses)
+              })
+            }),
+          )
+        } else {
+          getAdaptiveQuestion().then((res) => {
+            this.question = res.question
+            this.form.title = res.title
+            this.description = res.description
+          })
+          this.status = 1
+        }
+      })
+    } else {
+      getAdaptiveQuestion().then((res) => {
+        this.question = res.question
+        this.form.title = res.title
+        this.description = res.description
+      })
+      this.status = 1
+    }
 
     // resAdaptiveQuestion(this.form).then(res => {
     //   this.result = res
@@ -315,7 +324,7 @@ export default {
       background: #fff;
     }
 
-    .el-radio-button__orig-radio:checked:hover+.el-radio-button__inner {
+    .el-radio-button__orig-radio:checked:hover + .el-radio-button__inner {
       color: #fff;
     }
   }

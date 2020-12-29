@@ -5,6 +5,9 @@
     <LoginDialog v-if="openLoginDialog || (isLogin && !hasInterest)" />
     </transition>
     <transition name="fade">
+      <NewBieDialog v-if="isNewBie"></NewBieDialog>
+    </transition>
+    <transition name="fade">
       <AdaptiveDialog v-if="openAdaptiveDialog"></AdaptiveDialog>
     </transition>
     <router-view></router-view>
@@ -23,6 +26,7 @@ import { mapState, mapGetters } from 'vuex'
 import Header from '@/components/Header.vue'
 import Navigator from '@/components/Navigator.vue'
 import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
+import NewBieDialog from '@/components/Dialog/NewBieDialog'
 import LoginDialog from '@/components/Dialog/LoginDialog'
 
 export default {
@@ -31,12 +35,13 @@ export default {
     Header,
     Navigator,
     AdaptiveDialog,
+    NewBieDialog,
     LoginDialog
   },
 
   computed: {
     ...mapState(['isCompare', 'pattern', 'openAdaptiveDialog', 'openLoginDialog']),
-    ...mapGetters('user', ['isLogin', 'hasInterest']),
+    ...mapGetters('user', ['isLogin', 'hasInterest', 'isNewBie']),
   },
 
   methods: {},

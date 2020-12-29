@@ -13,11 +13,28 @@ export default {
     email: '',
     bank_code: '',
     bank_account: '',
+    hasPassNewBie: false,
   },
   getters: {
     userRole: (state, getters, { user }) => user.role || {},
     isLogin: (state) => !!state.token,
-    hasInterest: (state) => state.interests ? state.interests.length > 0 : true
+    hasInterest: (state) => state.interests ? state.interests.length > 0 : true,
+    isNewBie: (state) => {
+      // 不會彈新手彈窗的情況
+      // 沒有會員登入的時候，檢查 local storage，看是否 hasPassNewBie，沒做過就彈
+      // 有會員登入的時候不彈
+      // 其他都彈
+      if (state.token) {
+        // 有會員登入的時候不彈
+        return false
+      } else {
+        if (state.hasPassNewBie) {
+          return false
+        } else {
+          return true
+        }
+      }
+    }
   },
   actions: {
 
@@ -54,5 +71,9 @@ export default {
     clearInfo(state, list) {
       list.forEach(key => (state[key] = ''))
     },
+
+    passQuiz(state) {
+      state.hasPassNewBie = true
+    }
   }
 }
