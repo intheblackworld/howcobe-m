@@ -45,7 +45,7 @@
         推薦課程
       </div>
       <div class="cate-list">
-        <div class="cate-item" v-for="cate in interest_list" :key="cate.id" @click="$router.push({path: '/detail', query: { id: cate.id, platform: cate.platform}})">
+        <div class="cate-item" v-for="cate in interest_list" :key="cate.id" @click="$router.push({path: '/detail/course', query: { id: cate.id, platform: cate.platform}})">
           {{cate.title}}
         </div>
       </div>

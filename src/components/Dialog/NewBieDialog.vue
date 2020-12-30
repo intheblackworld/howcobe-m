@@ -110,7 +110,7 @@ export default {
 
 .newbie-form {
   width: 100%;
-  height: 667px;
+  height: 100vh;
   padding: 20px 0px;
   background-color: #25243c;
   border-radius: 5px;
