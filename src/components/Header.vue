@@ -71,7 +71,9 @@ export default {
 
     quickSearch(val) {
       this.$store.commit('updateSearch', val)
-      this.$router.push('/courses')
+      if (this.$route.path.includes('/home')) {
+        this.$router.push('/courses')
+      }
       // this.$emit('focusSearch')
     },
   },

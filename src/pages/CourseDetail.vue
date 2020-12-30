@@ -168,6 +168,12 @@
   display: none;
 }
 
+.htmlStyle {
+  * {
+    max-height: auto !important;
+  }
+}
+
 // yotta
 .htmlStyle,
 .course-intro-container {
