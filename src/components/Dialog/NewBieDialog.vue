@@ -73,7 +73,7 @@ export default {
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(56, 71, 94, 0.9);
+  background-color: #25243c;
   z-index: 1000;
   // background-color: #999;
 
