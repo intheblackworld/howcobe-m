@@ -460,7 +460,7 @@
 }
 
 .card-rating {
-  font-size: size(16);
+  font-size: sizem(16);
   color: #666;
   margin-left: 10px;
 }
