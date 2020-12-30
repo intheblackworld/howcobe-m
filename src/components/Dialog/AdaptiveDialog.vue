@@ -236,37 +236,46 @@ export default {
 
   async mounted() {
     if (this.isLogin) {
-      getAdaptive().then(async (res) => {
-        if (res.userAdaptiveRecord.categoryTendencyList) {
-          this.radarOption.series[0].data = [
-            res.userAdaptiveRecord.categoryTendencyList.map(
-              (c) => Object.values(c)[0],
-            ),
-          ]
-          this.status = 3
-          this.categories = res.userAdaptiveRecord.categories
-          await Promise.all(
-            this.categories.map(async (category) => {
-              searchCourse({
-                limit: 3,
-                page: Math.floor(Math.random() * 3) + 1,
-                sortway: 'DESC',
-                sortvalue: 'avg_rating',
-                category,
-              }).then((res) => {
-                this.interest_list.push(...res.courses)
-              })
-            }),
-          )
-        } else {
-          getAdaptiveQuestion().then((res) => {
-            this.question = res.question
-            this.form.title = res.title
-            this.description = res.description
-          })
-          this.status = 1
-        }
-      })
+      if (this.$store.state.user.result) {
+        this.result = this.$store.state.user.result
+        this.radarOption.series[0].data = [
+          this.result.categoryTendencyList.map((c) => Object.values(c)[0]),
+        ]
+        this.status = 2
+        this.$store.commit('user/clearResult')
+      } else {
+        getAdaptive().then(async (res) => {
+          if (res.userAdaptiveRecord.categoryTendencyList) {
+            this.radarOption.series[0].data = [
+              res.userAdaptiveRecord.categoryTendencyList.map(
+                (c) => Object.values(c)[0],
+              ),
+            ]
+            this.status = 3
+            this.categories = res.userAdaptiveRecord.categories
+            await Promise.all(
+              this.categories.map(async (category) => {
+                searchCourse({
+                  limit: 3,
+                  page: Math.floor(Math.random() * 3) + 1,
+                  sortway: 'DESC',
+                  sortvalue: 'avg_rating',
+                  category,
+                }).then((res) => {
+                  this.interest_list.push(...res.courses)
+                })
+              }),
+            )
+          } else {
+            getAdaptiveQuestion().then((res) => {
+              this.question = res.question
+              this.form.title = res.title
+              this.description = res.description
+            })
+            this.status = 1
+          }
+        })
+      }
     } else {
       getAdaptiveQuestion().then((res) => {
         this.question = res.question
