@@ -14,6 +14,8 @@ export default {
     bank_code: '',
     bank_account: '',
     hasPassNewBie: false,
+    // 適性測驗結果
+    result: null,
   },
   getters: {
     userRole: (state, getters, { user }) => user.role || {},
@@ -74,6 +76,14 @@ export default {
 
     passQuiz(state) {
       state.hasPassNewBie = true
-    }
+    },
+
+    saveResult(state, data) {
+      state.result = data
+    },
+
+    clearResult(state) {
+      state.result = null
+    },
   }
 }

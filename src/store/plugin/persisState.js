@@ -4,6 +4,7 @@ export default {
     'user.token',
     'user.refresh_token',
     'user.secret_word',
-    'user.hasPassNewBie'
+    'user.hasPassNewBie',
+    'user.result'
   ]
 }

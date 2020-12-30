@@ -192,6 +192,7 @@ export default {
         this.categories = res.categories
         this.interest_list = res.recommend_classes
         this.status = 2
+        this.$store.commit('user/saveResult', res)
         this.$store.commit('user/passQuiz')
         this.radarOption.series[0].data = [
           this.result.categoryTendencyList.map((c) => Object.values(c)[0]),
