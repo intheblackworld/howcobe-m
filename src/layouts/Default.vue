@@ -57,7 +57,6 @@ export default {
 
   methods: {
     onScroll() {
-      console.log(123)
       // 获取所有锚点元素
       // const navContents = document.querySelectorAll('.section')
       // // 所有锚点元素的 offsetTop
@@ -77,8 +76,7 @@ export default {
       //     navIndex = n
       //   }
       // }
-      console.log(scrollTop)
-      if (scrollTop > 400 && scrollTop < 450) {
+      if (scrollTop > 700 && scrollTop < 750) {
         this.scrollTop = true
       }
     },
