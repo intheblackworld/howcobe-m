@@ -237,7 +237,11 @@ export default {
     if (this.$route.query.category) {
       this.category = this.$route.query.category
     }
-    await this.getCourse()
+    if (this.$route.query.search) {
+      this.$store.commit('updateSearch', this.$route.query.search)
+    } else {
+      await this.getCourse()
+    }
     // window.addEventListener('scroll', this.onScroll, false)
   },
 
