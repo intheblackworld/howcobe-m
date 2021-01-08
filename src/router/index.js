@@ -31,7 +31,7 @@ const routes = [
 
           // 課程列表頁
           {
-            path: '/courses',
+            path: '/course',
             name: 'courses',
             component: () => import(/* webpackChunkName: "about" */ '@/pages/Courses.vue'),
           },
@@ -96,7 +96,7 @@ const routes = [
     ],
   },
   {
-    path: '404',
+    path: '/404',
     name: '404',
     meta: { transName: 'fade', page: '404' }, // slide, fade
     component: () => import(/* webpackChunkName: "404" */ '@/pages/404.vue'),
@@ -122,10 +122,7 @@ router.beforeEach((to, from, next) => {
     if (url.includes('/detail/vote?id=')) {
       url = url.replace('/detail/vote?id=', '/vote_detail?id=')
     }
-
-    if (url.includes('/courses')) {
-      url = url.replace('/courses', '/course')
-    }
+    
     window.location.href = url.replace('m.howcobe.com', 'howcobe.com')
   }
 
