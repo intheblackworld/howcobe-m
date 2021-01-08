@@ -122,6 +122,10 @@ router.beforeEach((to, from, next) => {
     if (url.includes('/detail/vote?id=')) {
       url = url.replace('/detail/vote?id=', '/vote_detail?id=')
     }
+
+    if (url.includes('/courses')) {
+      url = url.replace('/courses', '/course')
+    }
     window.location.href = url.replace('m.howcobe.com', 'howcobe.com')
   }
 
