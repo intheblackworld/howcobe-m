@@ -25,7 +25,7 @@ export default {
           name: '課程',
           icon: require('@/assets/img/icons/course.png'),
           icon_active: require('@/assets/img/icons/course_active.png'),
-          to: '/courses',
+          to: '/course',
         },
         {
           name: '比課',
