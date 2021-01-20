@@ -73,7 +73,7 @@ export default {
     },
 
     countChapter(chapters) {
-      const length_list = chapters.map(cha => cha.items.length)
+      const length_list = chapters.map(cha => cha.items ? cha.items.length : 0)
       return length_list.reduce((a, b) => a + b, 0)
     },
 
