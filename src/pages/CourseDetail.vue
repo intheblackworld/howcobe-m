@@ -111,7 +111,7 @@
               課程章節
             </div>
             <el-collapse v-model="activeChapter">
-              <el-collapse-item :title="chapter.title" v-for="(chapter, index) in current.chapters" :key="chapter.title + index" :name="index">
+              <el-collapse-item :title="chapter.title" v-for="(chapter, index) in formatChapters(current.chapters)" :key="chapter.title + index" :name="index">
                 <div class="chapter-subtitle" v-for="(item, subIndex) in chapter.items" :key="item.content.title + index + subIndex">
                   <span>{{item.content.title}}</span>
                   <!-- <span class="time">{{item.content.duration}}</span> -->
@@ -907,6 +907,18 @@ export default {
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
       })
     },
+    formatChapters(chapters) {
+      if (this.current.platform === 'pressplay') {
+        return [
+          {
+            title: '暫無資料',
+          },
+        ]
+        // return chapters[0].split('\n').filter((s) => !!s).map((c) => ({ title: c }))
+      } else {
+        return chapters
+      }
+    },
 
     formatContentByPlatform(platform) {
       let content = ''
@@ -969,6 +981,20 @@ export default {
             /href/g,
             'target="_blank" href',
           )}`
+          break
+        case 'pressplay':
+          content = `${
+            this.current.recommendedBackground
+          }<br/>${this.current.will_learn_pressplay.map(
+            (text) => `<pre class="block-desc">${text}</pre>`,
+          )}<div class="block"><div class="block-title">
+              課程說明
+            </div>
+            <pre class="block-desc normal">${this.current.description
+              .split('\n')
+              .filter((s) => !!s)
+              .join('<br />')}</pre>
+          </div>`
           break
         default:
           content = ''
