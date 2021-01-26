@@ -210,7 +210,7 @@ export default {
         }
       }
 
-      if (this.category.value) {
+      if (this.category) {
         title = '課程分類 | ' + this.category.label
       }
 
@@ -290,11 +290,13 @@ export default {
       }
 
       if (this.category) {
-        this.form.category = this.category.value
+        this.form.category = this.category
       }
       if (this.sortvalue) {
         this.form.sortvalue = this.sortvalue.type
       }
+
+      console.log(this.form)
       const addon = await this.$store.dispatch('course/searchCourse', {
         ...this.form,
       })
