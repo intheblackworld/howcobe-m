@@ -183,6 +183,10 @@
     line-height: 1.7em;
   }
 
+  img {
+    max-width: 100%;
+  }
+
   .fr-view img {
     margin: 5px auto;
     // display: none;
