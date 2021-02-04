@@ -49,13 +49,13 @@
     </div>
     <BlockHead :title="special_title_1" :link="{name: '', to: ''}" />
     <SwipeCards :courses="special_list_1.slice(0, 4)" />
-    
+
     <BlockHead :title="special_title_2" :link="{name: '', to: ''}" />
     <SwipeCards :courses="special_list_2.slice(0, 4)" />
-    
+
     <BlockHead :title="special_title_3" :link="{name: '', to: ''}" />
     <SwipeCards :courses="special_list_3.slice(0, 4)" />
-    
+
     <div class="footer flex-c">
       <a target="_blank" href="https://m.me/howcobe">
         聯絡我們
@@ -121,6 +121,9 @@
   z-index: 0;
   left: 0;
   animation: moving 80s linear infinite;
+  height: 100%;
+  padding-top: 30px;
+
   &:hover {
     animation-play-state: paused;
   }
@@ -191,7 +194,7 @@
 .footer {
   width: 100vw;
   height: 36px;
-  background-color:#1a192e;
+  background-color: #1a192e;
 
   a {
     text-align: center;
