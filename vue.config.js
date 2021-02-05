@@ -1,5 +1,5 @@
 const path = require('path')
-const meta = require('./src/info/meta')
+// const meta = require('./src/info/meta')
 
 const DEV_PATH = '/'
 const PRD_PATH = '/'
@@ -22,17 +22,17 @@ module.exports = {
     disableHostCheck: true
   },
 
-  chainWebpack: config => {
-    config.plugin('html').tap(args => {
-      args[0].title = meta.info.title
-      args[0].metaTitle = meta.info.title
-      args[0].ogMetaTitle = meta.info.title
-      args[0].metaDescription = meta.info.description
-      args[0].ogMetaDescription = meta.info.description
-      args[0].metaKeywords = meta.info.keywords
-      args[0].ogMetaType = 'website'
+  // chainWebpack: config => {
+  //   config.plugin('html').tap(args => {
+  //     args[0].title = meta.info.title
+  //     args[0].metaTitle = meta.info.title
+  //     args[0].ogMetaTitle = meta.info.title
+  //     args[0].metaDescription = meta.info.description
+  //     args[0].ogMetaDescription = meta.info.description
+  //     args[0].metaKeywords = meta.info.keywords
+  //     args[0].ogMetaType = 'website'
 
-      return args
-    })
-  }
+  //     return args
+  //   })
+  // }
 }

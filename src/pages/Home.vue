@@ -221,6 +221,7 @@ import SwipeCards from '@/components/SwipeCards.vue'
 import CompareLongCard from '@/components/CompareLongCard.vue'
 import CourseCard from '@/components/CourseCard.vue'
 import { mapState } from 'vuex'
+import { info } from '@/info/meta'
 import {
   // searchCourse,
   getVotes,
@@ -267,6 +268,92 @@ export default {
       isDialog: false,
     }
   },
+
+  metaInfo: {
+    title: info.title,
+    meta: [
+      {
+        property: 'title',
+        content: info.title,
+        vmid: 'title',
+      },
+      {
+        property: 'og:title',
+        content: info.title,
+        vmid: 'og:title',
+      },
+      {
+        property: 'description',
+        content: info.description,
+        vmid: 'description',
+      },
+      {
+        property: 'og:description',
+        content: info.description,
+        vmid: 'og:title',
+      },
+      {
+        property: 'keywords',
+        content: info.keywords,
+        vmid: 'keywords',
+      },
+      {
+        property: 'og:url',
+        content: 'https://m.howcobe.com/',
+        vmid: 'og:url',
+      },
+      {
+        property: 'og:image',
+        content: 'https://m.howcobe.com/img.png',
+      },
+    ],
+  },
+
+  jsonld: [
+    {
+      '@context': 'http://schema.org',
+      '@type': 'WebSite',
+      name: info.title,
+      url: 'https://m.howcobe.com/',
+      // potentialAction: [
+      //   {
+      //     "@type": "SearchAction",
+      //     target: "https: blog.lalacube.com search article?p={search_term_string}",
+      //     "query-input": "required name=search_term_string"
+      //   }
+      // ]
+    },
+    {
+      '@context': 'http://schema.org',
+      '@type': 'WebApplication',
+      name: info.title,
+      description: info.description,
+      operatingSystem: 'Windows 7, OSX 10.6',
+      browserRequirements: 'requires HTML5 support',
+      applicationCategory: 'DeveloperApplication',
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.5',
+        ratingCount: '3224',
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/InStock',
+        price: '0',
+        priceCurrency: 'TWD',
+      },
+      // "image": "https://m.howcobe.com/",
+      url: 'https://m.howcobe.com/',
+      // author: {
+      //   "@context": "http://schema.org",
+      //   "@type": "Organization",
+      //   name: "好課比",
+      //   url: "https://m.howcobe.com/",
+      //   logo: "https: blog.lalacube.com mei img app privacy i_512x512.png",
+      //   sameAs: ["https: www.facebook.com mei.studio.li "]
+      // }
+    },
+  ],
 
   methods: {
     goCompare() {
