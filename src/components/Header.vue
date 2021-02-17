@@ -45,7 +45,7 @@ export default {
       if (e.keyCode === 13) {
         this.$store.commit('updateSearch', this.search)
         if (this.$route.path.includes('/home')) {
-          this.$router.push('/courses')
+          this.$router.push('/course')
         }
         // if (this.pattern === 'compare') {
         //   // 叫出 tinder 效果彈窗
@@ -72,7 +72,7 @@ export default {
     quickSearch(val) {
       this.$store.commit('updateSearch', val)
       if (this.$route.path.includes('/home')) {
-        this.$router.push('/courses')
+        this.$router.push('/course')
       }
       // this.$emit('focusSearch')
     },
