@@ -7,7 +7,20 @@ import store from '@/store'
 import app from '@/main'
 import md5 from 'crypto-js/md5'
 // import qs from 'qs'
-const devApi = 'http://localhost:6001'
+const devApi = 'https://f4257e2a06af.ngrok.io'
+// let user = {
+//   id: responseUserDataJSON.sub,
+//   email:responseUserDataJSON.email||'', 
+//   line_open_id:responseUserDataJSON.sub,
+//   login_type:'line',
+//   social_name:responseUserDataJSON.name||'',
+//   social_pic:responseUserDataJSON.picture||'',
+//   updated_time:new Date()
+// }
+// let user_create = {
+//   name:responseUserDataJSON.name||'',
+//   created_time:new Date(),
+// }
 const prdApi = 'https://api.howcobe.com'
 
 const baseURL = process.env.NODE_ENV === 'development' ? devApi : prdApi
@@ -155,7 +168,7 @@ axios.interceptors.response.use(
  */
 export function get(url, params) {
   // store.commit('setLoading', true)
-  app.$Progress.start()
+  // app.$Progress.start()
 
   return new Promise((resolve, reject) => {
     // console.log(params)
@@ -181,12 +194,12 @@ export function get(url, params) {
       })
       .then((res) => {
         // store.commit('setLoading', false)
-        app.$Progress.finish()
+        // app.$Progress.finish()
         resolve(res.data)
       })
       .catch((err) => {
         // store.commit('setLoading', false)
-        app.$Progress.fail()
+        // app.$Progress.fail()
         reject(err.data)
       })
   })
@@ -198,18 +211,18 @@ export function get(url, params) {
  */
 export function post(url, params) {
   // store.commit('setLoading', true)
-  app.$Progress.start()
+  // app.$Progress.start()
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
       .then((res) => {
         // store.commit('setLoading', false)
-        app.$Progress.finish()
+        // app.$Progress.finish()
         resolve(res.data)
       })
       .catch((err) => {
         // store.commit('setLoading', false)
-        app.$Progress.fail()
+        // app.$Progress.fail()
         reject(err.data)
       })
   })
@@ -222,18 +235,18 @@ export function post(url, params) {
  */
 export function remove(url, params) {
   // store.commit('setLoading', true)
-  app.$Progress.start()
+  // app.$Progress.start()
   return new Promise((resolve, reject) => {
     axios
       .delete(url, params)
       .then((res) => {
         // store.commit('setLoading', false)
-        app.$Progress.finish()
+        // app.$Progress.finish()
         resolve(res.data)
       })
       .catch((err) => {
         // store.commit('setLoading', false)
-        app.$Progress.fail()
+        // app.$Progress.fail()
         reject(err.data)
       })
   })

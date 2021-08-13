@@ -18,6 +18,10 @@
         <div class="title">登入/註冊</div>
         <div class="form-group">
           <div
+            class="btn line flex-c"
+            @click="lineLogin"
+          >Line 登入</div>
+          <div
             class="btn fb flex-c"
             @click="fbLogin"
           >Facebook 登入</div>
@@ -58,7 +62,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { googleLogin, fbLogin, editUserInfo } from '@/http/api'
+import { googleLogin, fbLogin, lineLogin, editUserInfo } from '@/http/api'
 import { category as category_list } from '@/info/category'
 export default {
   name: 'login',
@@ -89,6 +93,17 @@ export default {
       fbLogin().then(res => {
         window.location.href = res.url
       })
+    },
+    
+
+    lineLogin() {
+      lineLogin().then(res => {
+        window.location.href = res.url;
+      })
+      // window.liff.login({
+      //   // 使用者登入後要去到哪個頁面
+      //   redirectUri: process.env.VUE_APP_REDIRECT_LINK
+      // });
     },
 
     transToInterest(category_list) {
@@ -224,13 +239,24 @@ export default {
   }
 
   &.fb {
-    background-color: #4db8cc;
+    background-color: #1060c8;
   }
 
   &.google {
     border: 1px solid #4db8cc;
     background-color: transparent;
     color: #4db8cc;
+    font-weight: bold;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &.line {
+    background-color: #00be00;
+    color: #000;
     font-weight: bold;
 
     svg {

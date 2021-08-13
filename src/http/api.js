@@ -32,6 +32,7 @@ export const searchCourse = ({ limit = 12, page = 1, search = '', sortway = 'DES
 
 export const getCourseDetail = ({ id }) => get(`/course/${id}`, {})
 
+export const lineLogin = () => get('/line', {})
 export const fbLogin = () => get('/facebook', {})
 export const googleLogin = () => get('/google', {})
 export const getUserInfo = () => get('/user/me', {})
