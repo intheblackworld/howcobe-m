@@ -745,13 +745,14 @@ import moment from 'moment'
 // import SwipeCards from '@/components/SwipeCards'
 // import EmptyCard from '@/components/EmptyCard'
 import { transCategory } from '@/info/category'
-import { isMobile } from '@/util/device'
+import { isMobile, isSafari } from '@/util/device'
 import VoteCompareDialog from '@/components/Dialog/VoteCompareDialog.vue'
 
 export default {
   name: 'voteDetail',
   data() {
     return {
+      isSafari,
       isMobile,
       isDialog: false,
       isShowBtn: false,
@@ -921,7 +922,11 @@ export default {
         platform: this.$route.query.platform,
         platform_course_id: this.current.platform_course_id,
       }).then((res) => {
-        window.open(res.url)
+        if (this.$route.query.source === 'line' || this.isSafari) {
+          window.location.href = res.url
+        } else {
+          window.open(res.url)
+        }
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
       })
     },

@@ -133,6 +133,7 @@ import CompareLongCard from '@/components/CompareLongAdminCard'
 import VoteLongCard from '@/components/VoteLongAdminCard'
 import VoteOrganCard from '@/components/VoteOrganAdminCard'
 import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
+import { isSafari } from '@/util/device'
 import {
   getBuyCourse,
   // getCollectCompare,
@@ -156,6 +157,7 @@ export default {
 
   data() {
     return {
+      isSafari,
       isEditDialog: false,
       activeTab: 'collect_course',
       category_list: category_list.slice(1, category_list.length),
@@ -350,8 +352,11 @@ export default {
         platform: row.platform,
         platform_id: row.id,
       }).then((res) => {
-        // console.log(res.url)
-        window.open(res.url)
+        if (this.$route.query.source === 'line' || this.isSafari) {
+          window.location.href = res.url
+        } else {
+          window.open(res.url)
+        }
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
       })
     },
