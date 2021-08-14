@@ -757,6 +757,7 @@ export default {
     // Card,
     // EmptyCard,
   },
+  
   async beforeMount() {
     await this.$store.dispatch('course/getCourseDetail', {
       id: this.$route.query.id,

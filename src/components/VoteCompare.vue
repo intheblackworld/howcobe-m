@@ -34,7 +34,7 @@
             <div @click="goDetail(item)" :class="`go-btn absolute blue`">查看課程詳情</div>
           </div>
           <div class="compare-row">
-            <img :src="require(`@/assets/img/${item.platform}.png`)" alt="" class="row-platfom">
+            <img :src="require(`@/assets/img/${item.platform}.png`)" alt="" class="row-platform">
           </div>
           <div class="compare-row">
             <div class="row-desc">{{item.title.slice(0, 15)}}</div>
@@ -403,7 +403,7 @@ export default {
   }
 }
 
-.row-platfom {
+.row-platform {
   width: 45px;
   margin: 0px auto;
 }
