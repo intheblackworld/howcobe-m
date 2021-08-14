@@ -26,7 +26,7 @@
     </div>
     <BlockHead title="隨機課程" :link="false" />
     <SwipeCards :courses="platform_courses.slice(0, 4)" />
-    <BlockHead title="熱門課程" :link="{name: '更多課程', to: '/courses?type=hot'}" />
+    <BlockHead title="熱門課程" :link="{name: '更多課程', to: '/course?type=hot'}" />
     <SwipeCards :courses="hot_courses" />
 
     <BlockHead title="熱門比課" :link="{name: '更多比課', to: '/compares?type=hot'}" />
@@ -34,7 +34,7 @@
       <CompareLongCard v-for="compare in hot_compares.slice(0, 4)" :key="compare.compare_course_id" :compare="compare" />
     </div>
 
-    <BlockHead title="最新課程" :link="{name: '更多課程', to: '/courses?type=new'}" />
+    <BlockHead title="最新課程" :link="{name: '更多課程', to: '/course?type=new'}" />
     <SwipeCards :courses="new_courses" />
 
     <BlockHead title="最新比課" :link="{name: '更多比課', to: '/compares?type=new'}" />
@@ -42,8 +42,8 @@
       <CompareLongCard v-for="compare in new_compares.slice(0, 4)" :key="compare.compare_course_id" :compare="compare" />
     </div>
 
-    <BlockHead title="好評課程" :link="{name: '更多課程', to: '/courses?type=fivestar'}" />
-    <!-- <BlockHead title="推薦課程" :link="{name: '更多課程', to: '/courses?type=suggest'}" /> -->
+    <BlockHead title="好評課程" :link="{name: '更多課程', to: '/course?type=fivestar'}" />
+    <!-- <BlockHead title="推薦課程" :link="{name: '更多課程', to: '/course?type=suggest'}" /> -->
     <div class="flex scroll-x">
       <CourseCard v-for="course in fivestar_courses" :key="course.id" :course="course" />
     </div>
