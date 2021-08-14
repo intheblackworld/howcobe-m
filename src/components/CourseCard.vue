@@ -1,5 +1,5 @@
 <template>
-  <router-link class="course-card" tag="div" :to="`/detail/course?id=${course.id}`">
+  <router-link class="course-card" tag="div" :to="`/detail/course?id=${course.id}?platform=${course.platfom}`">
     <div class="course-img relative" @click.stop="toggleCollect(course)">
       <img :src="course.cover_image" alt="">
       <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">

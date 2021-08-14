@@ -151,7 +151,7 @@ export default {
       if (this.$route.query.id === item.id) {
         this.$emit('closeDialog')
       } else {
-        this.$router.push({ path: '/detail/course', query: { id: item.id } })
+        this.$router.push({ path: '/detail/course', query: { id: item.id, platform: item.platform } })
         this.$emit('closeDialog')
       }
     },
