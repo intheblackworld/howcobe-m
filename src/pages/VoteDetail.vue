@@ -745,13 +745,14 @@ import moment from 'moment'
 // import SwipeCards from '@/components/SwipeCards'
 // import EmptyCard from '@/components/EmptyCard'
 import { transCategory } from '@/info/category'
-import { isMobile } from '@/util/device'
+import { isMobile, isSafari } from '@/util/device'
 import VoteCompareDialog from '@/components/Dialog/VoteCompareDialog.vue'
 
 export default {
   name: 'voteDetail',
   data() {
     return {
+      isSafari,
       isMobile,
       isDialog: false,
       isShowBtn: false,

@@ -133,6 +133,7 @@ import CompareLongCard from '@/components/CompareLongAdminCard'
 import VoteLongCard from '@/components/VoteLongAdminCard'
 import VoteOrganCard from '@/components/VoteOrganAdminCard'
 import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
+import { isSafari } from '@/util/device'
 import {
   getBuyCourse,
   // getCollectCompare,
@@ -156,6 +157,7 @@ export default {
 
   data() {
     return {
+      isSafari,
       isEditDialog: false,
       activeTab: 'collect_course',
       category_list: category_list.slice(1, category_list.length),
