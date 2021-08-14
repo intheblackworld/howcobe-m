@@ -908,7 +908,7 @@ export default {
         platform: this.$route.query.platform,
         platform_course_id: this.current.platform_course_id,
       }).then((res) => {
-        if (this.$router.query.source === 'line') {
+        if (this.$route.query.source === 'line') {
           window.location.href = res.url
         } else {
           window.open(res.url)
