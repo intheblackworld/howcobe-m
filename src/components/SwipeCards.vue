@@ -1,6 +1,6 @@
 <template>
   <div class="course-swipe">
-    <router-link class="course-card flex-at flex-jb" tag="div" :to="`/detail/course?id=${course.id}&platform=${course.platfom}`" v-for="(course, index) in courses" :key="course.id">
+    <router-link class="course-card flex-at flex-jb" tag="div" :to="`/detail/course?id=${course.id}&platform=${course.platform}`" v-for="(course, index) in courses" :key="course.id">
       <div class="course-img" @click.stop="toggleCollect(course, index)">
         <img :src="course.cover_image" alt="">
         <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">

@@ -480,7 +480,7 @@ export default {
   cursor: pointer;
 }
 
-.row-platfom {
+.row-platform {
   width: 45px;
   margin: 0px 5px;
   box-shadow: 0 1px 2px 0 #333;
