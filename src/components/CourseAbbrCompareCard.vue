@@ -1,5 +1,5 @@
 <template>
-  <router-link tag="div" :class="`course-card flex-at flex-jb ${(pattern === 'pick') ? 'pick' : ''} ${isPick ? 'picked' : ''}`" :to="`/detail/course?id=${course.id}`">
+  <router-link tag="div" :class="`course-card flex-at flex-jb ${(pattern === 'pick') ? 'pick' : ''} ${isPick ? 'picked' : ''}`" :to="`/detail/course?id=${course.id}&platform=${course.platfom}`">
     <div class="course-img" @click.stop="toggleCompare(course)">
       <img :src="course.cover_image" alt="">
       <img :src="require(`@/assets/img/${course.platform}.png`)" class="platform-img" alt="">
