@@ -733,12 +733,13 @@ import SwipeCards from '@/components/SwipeCards'
 import CompareDialog from '@/components/Dialog/CompareDialog.vue'
 // import EmptyCard from '@/components/EmptyCard'
 import { transCategory } from '@/info/category'
-import { isMobile } from '@/util/device'
+import { isMobile, isSafari } from '@/util/device'
 
 export default {
   name: 'courseDetail',
   data() {
     return {
+      isSafari,
       isMobile,
       isDialog: false,
       isShowBtn: false,
@@ -757,7 +758,6 @@ export default {
     // Card,
     // EmptyCard,
   },
-  
   async beforeMount() {
     await this.$store.dispatch('course/getCourseDetail', {
       id: this.$route.query.id,
@@ -908,11 +908,12 @@ export default {
         platform: this.$route.query.platform,
         platform_course_id: this.current.platform_course_id,
       }).then((res) => {
-        if (this.$route.query.source === 'line') {
+        if (this.$route.query.source === 'line' || this.isSafari) {
           window.location.href = res.url
         } else {
           window.open(res.url)
         }
+        
         // https://product.mchannles.com/redirect_wa.php?k=2f8rH&tourl=https://hahow.in/courses/5d77176845639e00212bc562&uid1=user01&uid2=hahow
       })
     },
