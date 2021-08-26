@@ -1,7 +1,7 @@
 <template>
   <div class="dialog flex-c">
     <div :class="`login-form relative wrap ${(isLogin && !hasInterest) ? '' : 'short'}`">
-      <img src="../../assets/img/nav-logo-2.png" alt="" class="logo">
+      <img src="../../assets/img/nav-logo-2.png" alt class="logo" />
       <div class="close" @click="closeLoginDialog">
         <font-awesome :icon="['fa', 'slash']" />
         <font-awesome :icon="['fa', 'slash']" />
@@ -11,6 +11,7 @@
         <div class="form-group">
           <div class="btn google flex-c" @click="googleLogin">Google 登入</div>
           <div class="btn fb flex-c" @click="fbLogin">Facebook 登入</div>
+          <div class="btn line flex-c" @click="lineLogin">Line 登入</div>
         </div>
       </div>
       <div v-else>
@@ -18,10 +19,8 @@
       </div>
       <div v-if="isLogin && !hasInterest">
         <div class="interest-title">請選擇感興趣的課程</div>
-        <div class="interests flex wrap ">
-          <div :class="`item ${interest.selected ? 'selected' : ''}`" v-for="interest in selected_interests" @click="select_interest(interest)" :key="interest.value">
-            {{interest.label}}
-          </div>
+        <div class="interests flex wrap">
+          <div :class="`item ${interest.selected ? 'selected' : ''}`" v-for="interest in selected_interests" @click="select_interest(interest)" :key="interest.value">{{interest.label}}</div>
         </div>
         <div class="interest-hint">至多五項</div>
         <div class="interest-btn flex-c" v-if="selected_interests_count > 0" @click="updateInterests">送出</div>
@@ -34,65 +33,75 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import { googleLogin, fbLogin, editUserInfo } from '@/http/api'
-import { category as category_list } from '@/info/category'
+import { mapState, mapGetters } from "vuex";
+import { googleLogin, fbLogin, lineLogin, editUserInfo } from "@/http/api";
+import { category as category_list } from "@/info/category";
 export default {
-  name: 'loginDialog',
+  name: "loginDialog",
 
   data() {
     return {
       category_list: category_list.slice(1, category_list.length),
-      selected_interests: [],
-    }
+      selected_interests: []
+    };
   },
 
   computed: {
-    ...mapGetters('user', ['isLogin', 'hasInterest']),
-    ...mapState('user', ['interests', 'name']),
+    ...mapGetters("user", ["isLogin", "hasInterest"]),
+    ...mapState("user", ["interests", "name"]),
 
     selected_interests_count() {
       return this.selected_interests.filter(item => item.selected === true)
-        .length
-    },
+        .length;
+    }
   },
   methods: {
     googleLogin() {
       googleLogin().then(res => {
-        window.location.href = res.url
-      })
+        window.location.href = res.url;
+      });
     },
     fbLogin() {
       fbLogin().then(res => {
-        window.location.href = res.url
+        window.location.href = res.url;
+      });
+    },
+
+    lineLogin() {
+      lineLogin().then(res => {
+        window.location.href = res.url;
       })
+      // window.liff.login({
+      //   // 使用者登入後要去到哪個頁面
+      //   redirectUri: process.env.VUE_APP_REDIRECT_LINK
+      // });
     },
 
     transToInterest(category_list) {
-      return category_list.map(category => ({ ...category, selected: false }))
+      return category_list.map(category => ({ ...category, selected: false }));
     },
 
     select_interest(interest) {
       const objIndex = this.selected_interests.findIndex(
-        obj => obj.value === interest.value,
-      )
+        obj => obj.value === interest.value
+      );
       if (this.selected_interests_count >= 5) {
-        this.selected_interests[objIndex].selected = false
+        this.selected_interests[objIndex].selected = false;
       } else {
         this.selected_interests[objIndex].selected = !this.selected_interests[
           objIndex
-        ].selected
+        ].selected;
       }
     },
 
     closeLoginDialog() {
       if (this.isLogin && this.selected_interests_count === 0) {
         this.$message({
-          message: '請先選擇感興趣的課程',
-          type: 'warning',
-        })
+          message: "請先選擇感興趣的課程",
+          type: "warning"
+        });
       } else {
-        this.$store.commit('closeLoginDialog')
+        this.$store.commit("closeLoginDialog");
       }
     },
 
@@ -100,24 +109,24 @@ export default {
       editUserInfo({
         interests: this.selected_interests
           .filter(item => item.selected === true)
-          .map(i => i.value),
+          .map(i => i.value)
       }).then(async () => {
         this.$message({
-          message: '修改成功',
-          type: 'success',
-        })
-        await this.$store.dispatch('user/getUserInfo')
-        await this.$store.dispatch('course/getInterestsCourse')
-        this.$store.commit('closeLoginDialog')
-        this.$store.commit('openAdaptiveDialog')
-      })
-    },
+          message: "修改成功",
+          type: "success"
+        });
+        await this.$store.dispatch("user/getUserInfo");
+        await this.$store.dispatch("course/getInterestsCourse");
+        this.$store.commit("closeLoginDialog");
+        this.$store.commit("openAdaptiveDialog");
+      });
+    }
   },
 
   async mounted() {
-    this.selected_interests = this.transToInterest(this.category_list)
-  },
-}
+    this.selected_interests = this.transToInterest(this.category_list);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -230,14 +239,23 @@ export default {
   }
 
   &.fb {
-    border: 1px solid #4db8cc;
-    background-color: transparent;
-    color: #4db8cc;
+    border: 1px solid #1060c8;
+    background-color: #1060c8;
+    color: #fff;
     font-weight: bold;
   }
 
   &.google {
     background-color: #4db8cc;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &.line {
+    background-color: #00be00;
 
     svg {
       width: 20px;
