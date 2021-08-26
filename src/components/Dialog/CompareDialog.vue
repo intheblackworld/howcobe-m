@@ -8,7 +8,7 @@
         </div>
         <div class="dialog-head flex-ac flex-jb">
           <div class="head-title">課程比拼</div>
-          <div class="yellow round-big middle btn flex-c" @click="showVoteDialog" v-show="compare_list.length >= 2">發起投票</div>
+          <!-- <div class="yellow round-big middle btn flex-c" @click="showVoteDialog" v-show="compare_list.length >= 2">發起投票</div> -->
           <div class="flex-ac flex-jb">
             <!-- TODO 發起投票流程 -->
             <!-- 1. search-compare-course 存入比較課程的搜尋紀錄 使用這隻API 回傳的 id -->
