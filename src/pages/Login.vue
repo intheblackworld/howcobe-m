@@ -17,10 +17,10 @@
       <div v-if="!isLogin">
         <div class="title">登入/註冊</div>
         <div class="form-group">
-          <div
+          <!-- <div
             class="btn line flex-c"
             @click="lineLogin"
-          >Line 登入</div>
+          >Line 登入</div> -->
           <div
             class="btn fb flex-c"
             @click="fbLogin"

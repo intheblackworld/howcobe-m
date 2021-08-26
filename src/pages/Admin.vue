@@ -72,12 +72,12 @@
       <div :class="`item ${typeIndex === 1 ? 'active' : ''}`" @click="typeIndex = 1">
         收藏比課
       </div>
-      <div :class="`item ${typeIndex === 2 ? 'active' : ''}`" @click="typeIndex = 2">
+      <!-- <div :class="`item ${typeIndex === 2 ? 'active' : ''}`" @click="typeIndex = 2">
         參與投票
-      </div>
-      <div :class="`item ${typeIndex === 3 ? 'active' : ''}`" @click="typeIndex = 3">
+      </div> -->
+      <!-- <div :class="`item ${typeIndex === 3 ? 'active' : ''}`" @click="typeIndex = 3">
         發起投票
-      </div>
+      </div> -->
     </div>
     <div class="content-container">
       <div v-if="typeIndex === 0">
@@ -99,7 +99,7 @@
           <div class="yellow round-big middle btn flex-c" @click="$router.push('/compares')">前往比課專區</div>
         </div>
       </div>
-      <div v-if="typeIndex === 2">
+      <!-- <div v-if="typeIndex === 2">
         <div v-if="result.vote_voter.length > 0">
           <VoteLongCard :vote="vote" v-for="vote in result.vote_voter" :key="vote.id"></VoteLongCard>
         </div>
@@ -107,8 +107,8 @@
           目前沒有參與投票
           <div class="yellow round-big middle btn flex-c" @click="$router.push('/votes')">前往投票專區</div>
         </div>
-      </div>
-      <div v-if="typeIndex === 3">
+      </div> -->
+      <!-- <div v-if="typeIndex === 3">
         <div v-if="result.vote_organizer.length > 0">
           <VoteOrganCard :vote="vote" v-for="vote in result.vote_organizer" :key="vote.id"></VoteOrganCard>
         </div>
@@ -116,7 +116,7 @@
           目前沒有發起投票
           <div class="yellow round-big middle btn flex-c" @click="$router.push('/votes')">前往投票專區</div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -130,8 +130,8 @@ import { findBank, bank_list } from '@/info/bank'
 import { category as category_list } from '@/info/category'
 import SwipeCards from '@/components/SwipeAdminCards.vue'
 import CompareLongCard from '@/components/CompareLongAdminCard'
-import VoteLongCard from '@/components/VoteLongAdminCard'
-import VoteOrganCard from '@/components/VoteOrganAdminCard'
+// import VoteLongCard from '@/components/VoteLongAdminCard'
+// import VoteOrganCard from '@/components/VoteOrganAdminCard'
 import AdaptiveDialog from '@/components/Dialog/AdaptiveDialog'
 import { isSafari } from '@/util/device'
 import {
@@ -150,8 +150,8 @@ export default {
     // Table,
     SwipeCards,
     CompareLongCard,
-    VoteLongCard,
-    VoteOrganCard,
+    // VoteLongCard,
+    // VoteOrganCard,
     AdaptiveDialog,
   },
 
@@ -250,8 +250,8 @@ export default {
 
       typeIndex: 0,
       result: {
-        vote_organizer: [],
-        vote_voter: [],
+        // vote_organizer: [],
+        // vote_voter: [],
       },
     }
   },
@@ -283,30 +283,30 @@ export default {
   },
 
   methods: {
-    async getMyVotes() {
-      this.result = await this.$store.dispatch('vote/getMyVotes')
-      // let addon
-      // switch (this.type) {
-      //   default:
-      //     if (this.$route.query.search) {
-      //       this.form.search = this.$route.query.search
-      //     }
+    // async getMyVotes() {
+    //   this.result = await this.$store.dispatch('vote/getMyVotes')
+    //   // let addon
+    //   // switch (this.type) {
+    //   //   default:
+    //   //     if (this.$route.query.search) {
+    //   //       this.form.search = this.$route.query.search
+    //   //     }
 
-      //     // if (this.$route.query.category) {
-      //     //   this.form.category = this.transCategory(this.$route.query.category)
-      //     // }
-      // addon = await this.$store.dispatch('vote/getMyVotes', {
-      //   ...this.form,
-      // })
-      //     // console.log(addon)
-      //     break
-      // }
-      // this.result = {
-      //   ...addon,
-      //   votes: [...this.result.votes, ...addon.voteCompareCourses],
-      // }
-      // console.log(this.result)
-    },
+    //   //     // if (this.$route.query.category) {
+    //   //     //   this.form.category = this.transCategory(this.$route.query.category)
+    //   //     // }
+    //   // addon = await this.$store.dispatch('vote/getMyVotes', {
+    //   //   ...this.form,
+    //   // })
+    //   //     // console.log(addon)
+    //   //     break
+    //   // }
+    //   // this.result = {
+    //   //   ...addon,
+    //   //   votes: [...this.result.votes, ...addon.voteCompareCourses],
+    //   // }
+    //   // console.log(this.result)
+    // },
     handleClick() {},
 
     InputNumber(property) {
@@ -449,7 +449,7 @@ export default {
     await this.$store.dispatch('course/getCollectCompare')
 
     // 投票相關
-    await this.getMyVotes()
+    // await this.getMyVotes()
   },
 }
 </script>

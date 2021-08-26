@@ -20,10 +20,10 @@
         <br />1500多門中文線上課課程
       </h3>
     </div>
-    <BlockHead title="最新投票" :link="{name: '更多投票', to: '/votes?type=hot'}" />
-    <div class="flex">
+    <!-- <BlockHead title="最新投票" :link="{name: '更多投票', to: '/votes?type=hot'}" /> -->
+    <!-- <div class="flex">
       <VoteCard v-for="vote in votes.slice(0, 2)" :key="vote.id" :vote="vote" />
-    </div>
+    </div> -->
     <BlockHead title="隨機課程" :link="false" />
     <SwipeCards :courses="platform_courses.slice(0, 4)" />
     <BlockHead title="熱門課程" :link="{name: '更多課程', to: '/course?type=hot'}" />
@@ -216,7 +216,7 @@
 // @ is an alias to /src
 // import CategoryList from '@/components/CategoryList.vue'
 import BlockHead from '@/components/BlockHead.vue'
-import VoteCard from '@/components/VoteCard.vue'
+// import VoteCard from '@/components/VoteCard.vue'
 import SwipeCards from '@/components/SwipeCards.vue'
 import CompareLongCard from '@/components/CompareLongCard.vue'
 import CourseCard from '@/components/CourseCard.vue'
@@ -224,7 +224,7 @@ import { mapState } from 'vuex'
 import { info } from '@/info/meta'
 import {
   // searchCourse,
-  getVotes,
+  // getVotes,
   getHotCourse,
   getNewCourse,
   getFiveStarCourse,
@@ -240,7 +240,7 @@ export default {
   components: {
     // CategoryList,
     BlockHead,
-    VoteCard,
+    // VoteCard,
     SwipeCards,
     CompareLongCard,
     CourseCard,
@@ -249,7 +249,7 @@ export default {
   data() {
     return {
       slide_list: [],
-      votes: [],
+      // votes: [],
       hot_courses: [],
       hot_compares: [],
       new_courses: [],
@@ -385,9 +385,9 @@ export default {
     // })
 
     // this.slide_list = result.courses
-    getVotes({}).then((res) => {
-      this.votes = res.voteCompareCourses
-    })
+    // getVotes({}).then((res) => {
+    //   this.votes = res.voteCompareCourses
+    // })
 
     getPlatformCourse().then((res) => {
       this.platform_courses = res

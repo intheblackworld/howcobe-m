@@ -33,12 +33,12 @@ export default {
           icon_active: require('@/assets/img/icons/compare_active.png'),
           to: '/compares',
         },
-        {
-          name: '投票',
-          icon: require('@/assets/img/icons/vote.png'),
-          icon_active: require('@/assets/img/icons/vote_active.png'),
-          to: '/votes',
-        },
+        // {
+        //   name: '投票',
+        //   icon: require('@/assets/img/icons/vote.png'),
+        //   icon_active: require('@/assets/img/icons/vote_active.png'),
+        //   to: '/votes',
+        // },
         {
           name: '個人',
           icon: require('@/assets/img/icons/admin.png'),
@@ -69,7 +69,7 @@ export default {
 }
 
 .nav-item {
-  width: 20%;
+  width: 25%;
   .nav-icon {
     width: 24px;
     margin-top: -10px;
