@@ -32,7 +32,7 @@ export default {
     TransPage
   },
 
-  async mounted() {
+  async beforeCreate() {
     // window.alert('liff')
     await liff.init({
       liffId: process.env.VUE_APP_LIFF_ID
