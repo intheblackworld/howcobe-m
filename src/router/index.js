@@ -8,7 +8,7 @@ import AdminLayout from '@/layouts/Admin.vue'
 import LoginLayout from '@/layouts/Login.vue'
 import is_need_access from './access_check'
 
-import { isPC, isBot } from '@/util/device.js'
+import { isPC } from '@/util/device.js'
 
 Vue.use(VueRouter)
 
@@ -114,7 +114,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (isPC && !isBot) {
+  if (isPC) {
     let url = window.location.href
     // if (url.includes('/detail/course?id=')) {
     //   url = url.replace('/detail/course?id=', '/detail?id=')
